@@ -28,6 +28,7 @@ const style = css({
   top: 0,
   width: '100%',
   'h6': {
+    color: '#fff',
     fontSize: 22,
     margin: '0 15px'
   },
@@ -39,7 +40,10 @@ const navStyle = css({
   boxSizing: 'border-box',
   margin: '0 15px',
   'a': {
-    paddingLeft: 15
+    marginLeft: 15,
+    position: 'relative',
+    color: '#fff',
+    textDecoration: 'none'
   }
 })
 
