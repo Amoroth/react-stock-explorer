@@ -20,10 +20,12 @@ const header = (props) => {
 const style = css({
   alignItems: 'center',
   backgroundColor: '#2f2f2f',
+  boxSizing: 'border-box',
   display: 'flex',
   height: 60,
   justifyContent: 'space-between',
   position: 'fixed',
+  top: 0,
   width: '100%',
   'h6': {
     fontSize: 22,
@@ -34,6 +36,7 @@ const style = css({
 })
 
 const navStyle = css({
+  boxSizing: 'border-box',
   margin: '0 15px',
   'a': {
     paddingLeft: 15
