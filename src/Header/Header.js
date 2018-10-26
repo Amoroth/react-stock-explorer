@@ -7,7 +7,7 @@ const header = (props) => {
   return (
     <nav className={style}>
       <div>
-        <h6>Stock Explorer Header!</h6>
+        <h6>Stock Explorer!</h6>
       </div>
       <div className={navStyle}>
         <a href="#" style={{ borderBottom: '5px solid #fff' }}>Place One</a>
@@ -45,6 +45,9 @@ const navStyle = css({
     marginLeft: 15,
     position: 'relative',
     textDecoration: 'none'
+  },
+  '@media screen and (max-width: 640px)': {
+    visibility: 'hidden',
   }
 })
 
