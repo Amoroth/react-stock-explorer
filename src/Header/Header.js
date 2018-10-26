@@ -10,7 +10,7 @@ const header = (props) => {
         <h6>Stock Explorer Header!</h6>
       </div>
       <div className={navStyle}>
-        <a href="#">Place One</a>
+        <a href="#" style={{ borderBottom: '5px solid #fff' }}>Place One</a>
         <a href="#">Place Two</a>
       </div>
     </nav>
@@ -20,7 +20,6 @@ const header = (props) => {
 const style = css({
   alignItems: 'center',
   backgroundColor: '#2f2f2f',
-  boxSizing: 'border-box',
   display: 'flex',
   height: 60,
   justifyContent: 'space-between',
@@ -32,17 +31,18 @@ const style = css({
     fontSize: 22,
     margin: '0 15px'
   },
-  'a': {
-  }
 })
 
 const navStyle = css({
-  boxSizing: 'border-box',
+  height: '100%',
   margin: '0 15px',
   'a': {
+    color: '#fff',
+    display: 'inline-block',
+    height: '100%',
+    lineHeight: '60px',
     marginLeft: 15,
     position: 'relative',
-    color: '#fff',
     textDecoration: 'none'
   }
 })
