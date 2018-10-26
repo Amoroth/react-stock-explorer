@@ -18,6 +18,7 @@ const style = css({
   maxWidth: 720,
   margin: '0 auto 8px auto',
   transition: 'box-shadow .1s ease-in-out',
+  borderRadius: '5px',
   'h6': {
     margin: 0,
     fontSize: 21,
