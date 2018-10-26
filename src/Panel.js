@@ -16,7 +16,7 @@ const style = css({
   padding: 16,
   width: '100%',
   maxWidth: 720,
-  margin: '5px auto',
+  margin: '0 auto 8px auto',
   transition: 'box-shadow .1s ease-in-out',
   'h6': {
     margin: 0,
