@@ -22,7 +22,7 @@ const style = css({
   // backgroundColor: '#2f2f2f',
   backgroundColor: '#344955',
   display: 'flex',
-  height: 60,
+  height: 62,
   justifyContent: 'space-between',
   position: 'fixed',
   top: 0,
