@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 
 import Header from './Header/Header'
-import Panel from './Panel'
+import Stocks from './Stocks/Stocks'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
-        <div>
-          <Panel />
-          <Panel />
-          <Panel />
-        </div>
+        <Stocks>
+        </Stocks>
       </div>
     );
   }
