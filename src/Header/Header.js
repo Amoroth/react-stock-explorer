@@ -19,7 +19,8 @@ const header = (props) => {
 
 const style = css({
   alignItems: 'center',
-  backgroundColor: '#2f2f2f',
+  // backgroundColor: '#2f2f2f',
+  backgroundColor: '#344955',
   display: 'flex',
   height: 60,
   justifyContent: 'space-between',
