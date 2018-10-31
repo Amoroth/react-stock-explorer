@@ -14,9 +14,9 @@ const style = css({
   backgroundColor: '#fff',
   boxShadow: '2px 4px 10px rgba(0,0,0,.0125)',
   padding: 16,
-  width: '100%',
+  width: '48%',
   maxWidth: 720,
-  margin: '0 auto 8px auto',
+  margin: '4px 4px 4px 4px',
   transition: 'box-shadow .1s ease-in-out',
   borderRadius: '5px',
   'h6': {
@@ -32,6 +32,7 @@ const style = css({
     boxShadow: '2px 4px 10px rgba(0,0,0,.1)',
   },
   '@media screen and (max-width: 620px)': {
+    width: '100%',
     maxWidth: '97%'
   }
 })
