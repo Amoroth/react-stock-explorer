@@ -1,7 +1,5 @@
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({ adapter: new Adapter() })
 
 import Stocks from './Stocks'
 
@@ -10,13 +8,13 @@ const stocksState = {
   stocks: [
     {
       name: 'first',
-      short: 'frt',
+      short: 'st',
       price: 15.5,
       change: 0.0001
     },
     {
       name: 'second',
-      short: 'scd',
+      short: 'nd',
       price: 105.5,
       change: -0.403
     }

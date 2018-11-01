@@ -8,14 +8,15 @@ const panel = (props) => {
   stockName = stockName.slice(0, 30) + '...'
   return (
     <div className={style}>
-      <h6 className={titleStyle} title={ stockName[stockName.length - 2] === '.' ? props.title : null }>{ stockName }
+      <h6 
+        className={titleStyle} 
+        title={ stockName[stockName.length - 2] === '.' ? props.title : null }>
+        { stockName }
       </h6>
       <div>
         <span>{ props.short }</span>
         <span>{ props.price } USD</span>
-        {/* <span>Something?</span> */}
-        <span 
-          style={{color: props.change > 0 ? 'green' : 'red'}}>
+        <span style={{color: props.change > 0 ? 'green' : 'red'}}>
           { priceChange }
         </span>
       </div>
