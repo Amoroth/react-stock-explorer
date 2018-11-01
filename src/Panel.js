@@ -2,31 +2,37 @@ import React from 'react'
 import { css } from 'emotion'
 
 const panel = (props) => {
+  let priceChange = `${props.change > 0 ? '+' : ''}${(props.change * 100).toFixed(2)}%`
   return (
     <div className={style}>
-      <h6>Title</h6>
-      <p>Some content</p>
+      <h6 className={titleStyle}>{ props.title }
+      </h6>
+      <div>
+        <span>{ props.short }</span>
+        <span>{ props.price }</span>
+        {/* <span>Something?</span> */}
+        <span 
+          style={{color: props.change > 0 ? 'green' : 'red'}}>
+          { priceChange }
+        </span>
+      </div>
     </div>
   )
 }
 
 const style = css({
   backgroundColor: '#fff',
-  boxShadow: '2px 4px 10px rgba(0,0,0,.0125)',
-  padding: 16,
-  width: '48%',
-  maxWidth: 720,
-  margin: '4px 4px 4px 4px',
-  transition: 'box-shadow .1s ease-in-out',
   borderRadius: '5px',
-  'h6': {
-    margin: 0,
-    fontSize: 21,
-    fontWeight: 'bold',
-  },
-  'p': {
-    margin: '10px 0 0 0',
-    fontSize: 15
+  boxShadow: '2px 4px 10px rgba(0,0,0,.0125)',
+  fontSize: '15px',
+  margin: '4px 4px 4px 4px',
+  maxWidth: '720px',
+  padding: '16px',
+  transition: 'box-shadow .1s ease-in-out',
+  width: '48%',
+  'div': {
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   '&:hover': {
     boxShadow: '2px 4px 10px rgba(0,0,0,.1)',
@@ -35,6 +41,18 @@ const style = css({
     width: '100%',
     maxWidth: '97%'
   }
+})
+
+const titleStyle = css({
+  fontSize: '21px',
+  fontWeight: 'bold',
+  margin: '0 0 10px 0',
+})
+
+const shortStyle = css({
+  fontSize: '15px',
+  fontWeight: 'normal',
+  marginLeft: '8px',
 })
 
 export default panel
