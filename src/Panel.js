@@ -12,7 +12,7 @@ const panel = (props) => {
       </h6>
       <div>
         <span>{ props.short }</span>
-        <span>{ props.price }</span>
+        <span>{ props.price } USD</span>
         {/* <span>Something?</span> */}
         <span 
           style={{color: props.change > 0 ? 'green' : 'red'}}>
