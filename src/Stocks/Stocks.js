@@ -37,7 +37,7 @@ class Stocks extends React.Component {
   }
   render() {
     const stocks = this.state.stocks.map((val) => {
-      return <Panel title={val.name} short={val.short} price={val.price} change={val.change} />
+      return <Panel title={val.name} short={val.short} price={val.price} change={val.change} key={val.short} />
     })
     return (
       <div className={style}>
