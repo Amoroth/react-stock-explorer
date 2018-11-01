@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
 
-import Panel from '../Panel'
+import Panel from './Panel'
 
 class Stocks extends React.Component {
   constructor(props) {
