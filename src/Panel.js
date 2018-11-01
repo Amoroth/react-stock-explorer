@@ -56,10 +56,10 @@ const titleStyle = css({
   margin: '0 0 10px 0',
 })
 
-const shortStyle = css({
-  fontSize: '15px',
-  fontWeight: 'normal',
-  marginLeft: '8px',
-})
+// const shortStyle = css({
+//   fontSize: '15px',
+//   fontWeight: 'normal',
+//   marginLeft: '8px',
+// })
 
 export default panel
