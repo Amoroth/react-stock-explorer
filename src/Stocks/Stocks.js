@@ -53,8 +53,10 @@ const style = css({
   margin: 'auto',
   flexWrap: 'wrap',
   width: '60%',
-  '@media screen and (max-width: 620px)': {
-    width: '100%'
+  '@media screen and (max-width: 800px)': {
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
   }
 })
 

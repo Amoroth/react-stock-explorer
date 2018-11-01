@@ -3,9 +3,12 @@ import { css } from 'emotion'
 
 const panel = (props) => {
   let priceChange = `${props.change > 0 ? '+' : ''}${(props.change * 100).toFixed(2)}%`
+  let stockName = props.title
+  if (stockName.length > 30)
+  stockName = stockName.slice(0, 30) + '...'
   return (
     <div className={style}>
-      <h6 className={titleStyle}>{ props.title }
+      <h6 className={titleStyle} title={ stockName[stockName.length - 2] === '.' ? props.title : null }>{ stockName }
       </h6>
       <div>
         <span>{ props.short }</span>
@@ -37,10 +40,14 @@ const style = css({
   '&:hover': {
     boxShadow: '2px 4px 10px rgba(0,0,0,.1)',
   },
+  '@media screen and (max-width: 800px)': {
+    width: '60%',
+    maxWidth: '97%'
+  },
   '@media screen and (max-width: 620px)': {
     width: '100%',
     maxWidth: '97%'
-  }
+  },
 })
 
 const titleStyle = css({
