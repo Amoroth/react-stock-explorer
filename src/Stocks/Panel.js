@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 import styles from './Stocks.module.css'
 
@@ -7,8 +8,13 @@ const panel = (props) => {
   let stockName = props.title
   if (stockName.length > 30)
   stockName = stockName.slice(0, 30) + '...'
+
+  const openFullPage = () => {
+    props.history.push(`/stock?comp=${props.short}`)
+  }
+
   return (
-    <div className={styles['panel']}>
+    <div className={styles['panel']} onClick={openFullPage}>
       <h6 
         className={styles['panel-title']} 
         title={ stockName[stockName.length - 2] === '.' ? props.title : null }>
@@ -25,4 +31,4 @@ const panel = (props) => {
   )
 }
 
-export default panel
+export default withRouter(panel)
