@@ -3,6 +3,7 @@
   margin: auto;
   flex-wrap: wrap;
   width: 60%;
+  justify-content: space-between;
 }
 
 .panel {
@@ -10,11 +11,10 @@
   border-radius: 5px;
   box-shadow: 2px 4px 10px rgba(0,0,0,.0125);
   font-size: 15px;
-  margin: 4px;
-  max-width: 720px;
+  margin: 1% 0;
   padding: 16px;
   transition: box-shadow .1s ease-in-out;
-  width: 48%;
+  width: 49%;
 }
 
 .panel:hover {
@@ -32,7 +32,7 @@
   margin: 0 0 10px 0;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 620px) {
   .container {
     width: 100%;
     flex-direction: column;
@@ -40,14 +40,6 @@
   }
 
   .panel {
-    width: 60%;
-    max-width: 97%;
-  }
-}
-
-@media screen and (max-width: 620px) {
-  .panel {
-    width: 100%;
-    max-width: 97%;
+    width: 97%;
   }
 }
