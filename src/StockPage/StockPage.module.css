@@ -33,3 +33,16 @@
   width: 60px;
   height: 60px;
 }
+
+.title-bar button:hover {
+  color: gray;
+}
+
+@media screen and (max-width: 620px) {
+  .container {
+    width: 97%;
+  }
+  .title-bar button {
+    visibility: hidden;
+  }
+}

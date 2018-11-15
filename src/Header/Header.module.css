@@ -42,7 +42,23 @@
   border-bottom: 5px solid #ddd;
 }
 
+.expand-button {
+  display: none;
+  margin: 0 15px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+}
+
 @media screen and (max-width: 620px) {
+  .brand {
+    display: inline;
+  }
+  
+  .expand-button {
+    display: inline;
+  }
+
   .nav-links {
     visibility: hidden;
   }

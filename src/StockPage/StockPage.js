@@ -27,7 +27,7 @@ class StockPage extends Component {
               <span>Nasdaq Global Select: { this.state.short }</span>
             </div>
             <button onClick={this.props.history.goBack}>
-              <i class="material-icons md-48">arrow_back</i>
+              <i className="material-icons md-48">arrow_back</i>
             </button>
           </div>
           <hr />
