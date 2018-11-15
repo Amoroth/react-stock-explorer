@@ -3,6 +3,7 @@
   margin: auto;
   flex-wrap: wrap;
   width: 60%;
+  max-width: 800px;
   justify-content: space-between;
 }
 
@@ -15,6 +16,7 @@
   padding: 16px;
   transition: box-shadow .1s ease-in-out;
   width: 49%;
+  cursor: pointer;
 }
 
 .panel:hover {
