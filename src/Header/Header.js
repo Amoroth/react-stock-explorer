@@ -1,8 +1,7 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 import styles from './Header.module.css'
-
-/* eslint-disable jsx-a11y/anchor-is-valid */
 
 const header = (props) => {
   return (
@@ -11,8 +10,8 @@ const header = (props) => {
         <h6 className={styles['brand']}>Stock Explorer!</h6>
       </div>
       <div className={styles['nav-links']}>
-        <a href="#" className={styles['nav-link-active']}>Place One</a>
-        <a href="#">Place Two</a>
+        <NavLink to="/" exact activeClassName={styles['nav-link-active']}>Home</NavLink>
+        <NavLink to="/error" activeClassName={styles['nav-link-active']}>Error</NavLink>
       </div>
     </nav>
   )
