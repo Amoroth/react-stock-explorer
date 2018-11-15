@@ -44,6 +44,6 @@
 
 @media screen and (max-width: 620px) {
   .nav-links {
-    visibility: 'hidden';
+    visibility: hidden;
   }
 }
