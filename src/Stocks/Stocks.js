@@ -1,7 +1,7 @@
 import React from 'react'
-import { css } from 'emotion'
 
 import Panel from './Panel'
+import styles from './Stocks.module.css'
 
 class Stocks extends React.Component {
   constructor(props) {
@@ -40,24 +40,12 @@ class Stocks extends React.Component {
       return <Panel title={val.name} short={val.short} price={val.price} change={val.change} key={val.short} />
     })
     return (
-      <div className={style}>
+      <div className={styles['container']}>
         {this.props.children}
         {stocks}
       </div>
     )
   }
 }
-
-const style = css({
-  display: 'flex',
-  margin: 'auto',
-  flexWrap: 'wrap',
-  width: '60%',
-  '@media screen and (max-width: 800px)': {
-    width: '100%',
-    flexDirection: 'column',
-    alignItems: 'center',
-  }
-})
 
 export default Stocks
