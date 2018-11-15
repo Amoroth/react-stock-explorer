@@ -4,13 +4,16 @@ import styles from './StockPage.module.css'
 
 class StockPage extends Component {
   state = {
-    title: ''
+    name: '',
+    short: '',
+    price: 0,
+    change: 0
   }
 
   componentDidMount() {
     const comp = new URLSearchParams(this.props.location.search.slice(1)).get('comp')
     this.setState(() => {
-      return {title: comp}
+      return {name: comp}
     })
   }
 
@@ -18,7 +21,15 @@ class StockPage extends Component {
     return (
       (
         <div className={styles['container']}>
-          <h1>{ this.state.title }</h1>
+          <div className={styles['title-bar']}>
+            <h6>{ this.state.name }</h6>
+            <button onClick={this.props.history.goBack}>
+              <i class="material-icons">arrow_back</i>
+            </button>
+          </div>
+          <div>
+
+          </div>
         </div>
       )
     )
