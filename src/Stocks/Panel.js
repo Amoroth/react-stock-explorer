@@ -10,7 +10,7 @@ const panel = (props) => {
   stockName = stockName.slice(0, 30) + '...'
 
   const openFullPage = () => {
-    props.history.push(`/stock?comp=${props.short}`)
+    props.history.push(`/stock?cmp=${props.short}`)
   }
 
   return (

@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter, NavLink } from 'react-router-dom'
 
+import SearchBar from './SearchBar'
 import styles from './Header.module.css'
 
 const header = (props) => {
@@ -24,8 +25,9 @@ const header = (props) => {
         <h6 className={styles['brand']}>Stock Explorer!</h6>
       </div>
       <div className={styles['nav-links']}>
-        <NavLink to="/" exact activeClassName={styles['nav-link-active']}>Home</NavLink>
-        <NavLink to="/error" activeClassName={styles['nav-link-active']}>Error</NavLink>
+        <SearchBar />
+        <NavLink to="/" exact activeClassName={styles['nav-link-active']} className={styles['nav-link']}>Home</NavLink>
+        <NavLink to="/error" activeClassName={styles['nav-link-active']} className={styles['nav-link']}>Error</NavLink>
       </div>
     </nav>
   )

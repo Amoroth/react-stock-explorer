@@ -11,10 +11,19 @@ class StockPage extends Component {
   }
 
   componentDidMount() {
-    const comp = new URLSearchParams(this.props.location.search.slice(1)).get('comp')
+    const cmp = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
     this.setState(() => {
-      return {short: comp}
+      return {short: cmp}
     })
+  }
+
+  componentDidUpdate() {
+    const cmp = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
+    if (cmp !== this.state.short) {
+      this.setState(() => {
+        return {short: cmp}
+      })
+    }
   }
 
   render() {
@@ -26,13 +35,25 @@ class StockPage extends Component {
               <h6>{ this.state.name }</h6>
               <span>Nasdaq Global Select: { this.state.short }</span>
             </div>
-            <button onClick={this.props.history.goBack}>
+            <button onClick={() => this.props.history.push('/')}>
               <i className="material-icons md-48">arrow_back</i>
             </button>
           </div>
           <hr />
           <div>
-
+            <p>Graph</p>
+            <p>Otwarcie | Maks. | Min. | Kapitalizacja | Wskaźnik C/Z</p>
+            <p>Dywidenda | Poprz. zam. | Najw./52 tyg. | Najn./52 tyg.</p>
+          </div>
+          <hr />
+          <div>
+            <p>Sektor</p>
+            <p>Powiazane firmy</p>
+          </div>
+          <hr />
+          <div>
+            <p>Informacje Finansowe (osobne okno?)</p>
+            <p>O firmie (osobne okno?)</p>
           </div>
         </div>
       )
