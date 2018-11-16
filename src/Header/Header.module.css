@@ -64,6 +64,17 @@
   transition: background .2s, color .2s;
 }
 
+.search-box-icon {
+  background-color: #344955;
+  border: none;
+  padding: 5px 10px;
+  height: 60%;
+  color: #fff;
+  position: absolute;
+  right: 15px;
+  top: 1em;
+}
+
 .search-box:focus {
   background-color: #fff;
   color: #000
@@ -104,7 +115,7 @@
   font-weight: normal;
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 800px) {
   .brand-container {
     margin: 0;
   }
@@ -125,5 +136,16 @@
 
   .desktop-only {
     display: none;
+  }
+
+  .search-box {
+    position: absolute;
+    right: 15px;
+    top: 1em;
+    box-shadow: -20px 2px 20px #344955
+  }
+  .search-box-results {
+    right: 15px;
+    top: 3em;
   }
 }

@@ -10,8 +10,10 @@ class SearchBar extends Component {
     this.state = {
       input: '',
       symbols: [],
-      searchResults: false
+      searchResults: false,
+      searchBox: false
     }
+    this.inputRef = React.createRef();
   }
 
   componentDidMount() {
@@ -20,7 +22,8 @@ class SearchBar extends Component {
       {name: 'Microsoft Corporation', symbol: 'msft'},
       {name: 'International Buissnes Machines Corporation', symbol: 'ibm'},
       {name: 'Twitter Inc.', symbol: 'twtr'}
-    ] })
+    ],
+    searchBox: window.innerWidth > 800 })
   }
 
   handleChange = (e) => {
@@ -31,25 +34,36 @@ class SearchBar extends Component {
     this.setState({ input: term })
   }
 
-  showSearchBox = () => {
+  showSearchResults = () => {
     this.setState({ searchResults: true })
   }
 
-  hideSearchBox = () => {
-    setTimeout(() => this.setState({ searchResults: false }), 100)
+  hideSearchResults = () => {
+    setTimeout(() => this.setState({ searchResults: false, searchBox: window.innerWidth > 800 }), 100)
+  }
+
+  showSearchBox = () => {
+    this.setState({ searchBox: true }, () => {
+      this.inputRef.current.focus()
+    })
   }
 
   render() {
     const filteredCmps = this.state.symbols.filter(createFilter(this.state.input, ['name', 'symbol']))
     return (
       <div style={{display: 'inline'}}>
-        {/* <SearchInput onChange={this.handleChange} ref={this.inputRef} /> */}
+        {this.state.searchBox ? 
         <input
           className={styles['search-box']}
           onChange={this.handleChange}
           value={this.state.input}
-          onFocus={this.showSearchBox}
-          onBlur={this.hideSearchBox} />
+          onFocus={this.showSearchResults}
+          onBlur={this.hideSearchResults}
+          ref={this.inputRef} /> : 
+        <button onClick={this.showSearchBox} className={styles['search-box-icon']}>
+          <i className="material-icons">search</i>
+        </button>}
+
         <div className={styles['search-box-results']}>
         {this.state.searchResults ? filteredCmps.slice(0, 4).map(cmp => {
           return (

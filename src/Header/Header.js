@@ -26,7 +26,7 @@ const header = (props) => {
         { expandButton }
         <h6 className={styles['brand']}>Stock Explorer!</h6>
       </div>
-      <div className={[styles['nav-links'], styles['desktop-only']].join(' ')}>
+      <div className={[styles['nav-links']].join(' ')}>
         <SearchBar />
         <NavLink to="/" exact activeClassName={styles['nav-link-active']} className={navlinkStyle}>Home</NavLink>
         <NavLink to="/error" activeClassName={styles['nav-link-active']} className={navlinkStyle}>Error</NavLink>
