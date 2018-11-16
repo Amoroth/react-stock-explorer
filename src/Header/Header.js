@@ -18,16 +18,18 @@ const header = (props) => {
     )
   }
 
+  let navlinkStyle = [styles['nav-link'], styles['desktop-only']].join(' ')
+
   return (
     <nav className={styles['container']}>
-      <div>
+      <div className={styles['brand-container']}>
         { expandButton }
         <h6 className={styles['brand']}>Stock Explorer!</h6>
       </div>
-      <div className={styles['nav-links']}>
+      <div className={[styles['nav-links'], styles['desktop-only']].join(' ')}>
         <SearchBar />
-        <NavLink to="/" exact activeClassName={styles['nav-link-active']} className={styles['nav-link']}>Home</NavLink>
-        <NavLink to="/error" activeClassName={styles['nav-link-active']} className={styles['nav-link']}>Error</NavLink>
+        <NavLink to="/" exact activeClassName={styles['nav-link-active']} className={navlinkStyle}>Home</NavLink>
+        <NavLink to="/error" activeClassName={styles['nav-link-active']} className={navlinkStyle}>Error</NavLink>
       </div>
     </nav>
   )

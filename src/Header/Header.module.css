@@ -10,15 +10,18 @@
   width: 100%;
 }
 
+.brand-container {
+  margin: 0 0 0 10%;
+}
+
 .brand {
   color: #fff;
   font-size: 22px;
-  margin: 0 15px;
 }
 
 .nav-links {
   height: 100%;
-  margin: 0 15px;
+  margin: 0 10% 0 0;
 }
 
 .nav-link {
@@ -102,15 +105,25 @@
 }
 
 @media screen and (max-width: 620px) {
+  .brand-container {
+    margin: 0;
+  }
+
   .brand {
     display: inline;
+    margin: 0;
   }
   
   .expand-button {
-    display: inline;
+    display: inline-block;
+    height: 100%;
   }
 
   .nav-links {
-    visibility: hidden;
+    margin: 0 15px 0 0;
+  }
+
+  .desktop-only {
+    display: none;
   }
 }
