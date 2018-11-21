@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import StockChart from './StockChart'
 import styles from './StockPage.module.css'
 
 class StockPage extends Component {
@@ -7,7 +8,13 @@ class StockPage extends Component {
     name: 'International Business Machines Corporation',
     short: '',
     price: 159.51,
-    change: 0.0241
+    change: 0.0241,
+    chart: [
+      {quarter: 1, earnings: 13000, label: 'hi'},
+      {quarter: 2, earnings: 16500, label: 'hi'},
+      {quarter: 3, earnings: 14250, label: 'hi'},
+      {quarter: 4, earnings: 19000, label: 'hi'},
+    ]
   }
 
   componentDidMount() {
@@ -41,7 +48,7 @@ class StockPage extends Component {
           </div>
           <hr />
           <div>
-            <p>Graph</p>
+            <StockChart data={this.state.chart} />
             <p>Otwarcie | Maks. | Min. | Kapitalizacja | Wskaźnik C/Z</p>
             <p>Dywidenda | Poprz. zam. | Najw./52 tyg. | Najn./52 tyg.</p>
           </div>
