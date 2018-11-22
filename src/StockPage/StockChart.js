@@ -1,11 +1,10 @@
 import React from 'react'
-import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme, VictoryTooltip } from 'victory'
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme } from 'victory'
 
 const stockChart = (props) => {
   let graphSizeX = window.innerWidth < 620 ? 350 : 500
   let graphSizeY = window.innerWidth < 620 ? 400 : 250
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-  
+
   return (
     <svg
       role="img"
@@ -22,10 +21,7 @@ const stockChart = (props) => {
       >
         <VictoryAxis
           tickValues={[1, 2, 3, 4]}
-          tickFormat={(y) => {
-            const date = new Date(y)
-            return `${date.getDate()} ${months[date.getMonth()]}`
-          }}
+          tickFormat={(y) => (`${y}`)}
           fixLabelOverlap={true}
           style={{ axis: {stroke: '#344955'}, tickLabels: {fill: '#344955'} }}
         />
@@ -36,10 +32,9 @@ const stockChart = (props) => {
         />
         <VictoryLine
           data={props.data}
-          x="date"
+          x="label"
           y="close"
-          labelComponent={<VictoryTooltip/>}
-          style={{data: {stroke: '#344955'}}}
+          style={{data: {stroke: '#344955'}, labels: { display: "none" }}}
         />
       </VictoryChart>
     </svg>
