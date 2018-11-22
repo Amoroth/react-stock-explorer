@@ -10,7 +10,26 @@ class StockPage extends Component {
     short: '',
     price: 159.51,
     change: 0.0241,
-    chart: []
+    chart: [{
+      "date": "2018-10-22",
+      "close": 219.8828,
+      "label": "Oct 22"
+      },
+      {
+      "date": "2018-10-23",
+      "close": 221.9556,
+      "label": "Oct 23"
+      },
+      {
+      "date": "2018-10-24",
+      "close": 214.3421,
+      "label": "Oct 24"
+      },
+      {
+      "date": "2018-10-25",
+      "close": 219.0358,
+      "label": "Oct 25"
+      }]
   }
 
   componentDidMount() {
