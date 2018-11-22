@@ -17,6 +17,11 @@ class SearchBar extends Component {
   }
 
   componentDidMount() {
+    // fetch('https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name').then((res) => {
+    //   return res.json()
+    // }).then((json) => {
+    //   this.setState({ symbols: json, searchBox: window.innerWidth > 800 })
+    // })
     this.setState({ symbols: [
       {name: 'Alphabet Inc.', symbol: 'googl'},
       {name: 'Microsoft Corporation', symbol: 'msft'},
