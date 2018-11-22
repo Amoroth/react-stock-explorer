@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import StockChart from './StockChart'
+import Spinner from '../shared/Spinner'
 import styles from './StockPage.module.css'
 
 class StockPage extends Component {
@@ -9,16 +10,19 @@ class StockPage extends Component {
     short: '',
     price: 159.51,
     change: 0.0241,
-    chart: [
-      {quarter: 1, earnings: 13000, label: 'hi'},
-      {quarter: 2, earnings: 16500, label: 'hi'},
-      {quarter: 3, earnings: 14250, label: 'hi'},
-      {quarter: 4, earnings: 19000, label: 'hi'},
-    ]
+    chart: []
   }
 
   componentDidMount() {
     const cmp = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
+    // fetch(`https://api.iextrading.com/1.0/stock/${cmp}/chart?filter=date,close,label`).then((res) => {
+    //   return res.json()
+    // }).then((json) => {
+    //   this.setState({
+    //     chart: json,
+    //     short: cmp
+    //   })
+    // })
     this.setState(() => {
       return {short: cmp}
     })
@@ -34,6 +38,21 @@ class StockPage extends Component {
   }
 
   render() {
+    let chartEl = (
+      <div style={{
+        height: '400px',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 'auto'}}>
+        <Spinner />
+      </div>
+    )
+    if (this.state.chart.length > 0) {
+      chartEl = <StockChart data={this.state.chart} />
+    }
+
     return (
       (
         <div className={styles['container']}>
@@ -48,7 +67,7 @@ class StockPage extends Component {
           </div>
           <hr />
           <div>
-            <StockChart data={this.state.chart} />
+            { chartEl }
             <p>Otwarcie | Maks. | Min. | Kapitalizacja | Wskaźnik C/Z</p>
             <p>Dywidenda | Poprz. zam. | Najw./52 tyg. | Najn./52 tyg.</p>
           </div>
