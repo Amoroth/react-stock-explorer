@@ -11,7 +11,7 @@ class SearchBar extends Component {
       input: '',
       symbols: [],
       searchResults: false,
-      searchBox: false
+      searchBoxInput: false,
     }
     this.inputRef = React.createRef();
   }
@@ -20,7 +20,7 @@ class SearchBar extends Component {
     // fetch('https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name').then((res) => {
     //   return res.json()
     // }).then((json) => {
-    //   this.setState({ symbols: json, searchBox: window.innerWidth > 800 })
+    //   this.setState({ symbols: json, searchBoxInput: window.innerWidth > 800 })
     // })
     this.setState({ symbols: [
       {name: 'Alphabet Inc.', symbol: 'googl'},
@@ -28,7 +28,7 @@ class SearchBar extends Component {
       {name: 'International Buissnes Machines Corporation', symbol: 'ibm'},
       {name: 'Twitter Inc.', symbol: 'twtr'}
     ],
-    searchBox: window.innerWidth > 800 })
+    searchBoxInput: window.innerWidth > 800 })
   }
 
   handleChange = (e) => {
@@ -44,33 +44,37 @@ class SearchBar extends Component {
   }
 
   hideSearchResults = () => {
-    setTimeout(() => this.setState({ searchResults: false, searchBox: window.innerWidth > 800 }), 100)
+    setTimeout(() => this.setState({ searchResults: false, searchBoxInput: window.innerWidth > 800 }), 100)
   }
 
-  showSearchBox = () => {
-    this.setState({ searchBox: true }, () => {
+  showSearchBoxInput = () => {
+    this.setState({ searchBoxInput: true }, () => {
       this.inputRef.current.focus()
     })
   }
 
   render() {
-    const filteredCmps = this.state.symbols.filter(createFilter(this.state.input, ['name', 'symbol']))
+    const filteredCmps = this.state.symbols.filter(
+      createFilter(this.state.input, ['name', 'symbol'])
+    )
+
     return (
       <div style={{display: 'inline'}}>
-        {this.state.searchBox ? 
+        {this.state.searchBoxInput ? 
         <input
           className={styles['search-box']}
           onChange={this.handleChange}
           value={this.state.input}
           onFocus={this.showSearchResults}
           onBlur={this.hideSearchResults}
-          ref={this.inputRef} /> : 
-        <button onClick={this.showSearchBox} className={styles['search-box-icon']}>
+          ref={this.inputRef}
+        /> : 
+        <button onClick={this.showSearchBoxInput} className={styles['search-box-icon']}>
           <i className="material-icons">search</i>
         </button>}
 
         <div className={styles['search-box-results']}>
-        {this.state.searchResults ? filteredCmps.slice(0, 4).map(cmp => {
+        {this.state.searchResults ? filteredCmps.slice(0, 4).map((cmp) => {
           return (
             <Link
               className={styles['search-box-result']}
