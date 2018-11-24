@@ -18,6 +18,7 @@ const stockChart = (props) => {
         standalone={false}
         style={{parent: {position: 'static'}}}
         domainPadding={{y: [20, 20]}}
+        padding={{ top: 10, right: 40, bottom: 30, left: 50 }}
       >
         <VictoryAxis
           tickValues={[1, 2, 3, 4]}

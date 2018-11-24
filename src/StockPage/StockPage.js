@@ -56,15 +56,22 @@ class StockPage extends Component {
     }
   }
 
+  onSelectCharttime = (time) => {
+    this.setState({
+      chart: []
+    })
+    fetch(`https://api.iextrading.com/1.0/stock/${this.state.short}/chart/${time}?filter=date,close,label`).then((res) => {
+      return res.json()
+    }).then((json) => {
+      this.setState({
+        chart: json
+      })
+    })
+  }
+
   render() {
     let chartEl = (
-      <div style={{
-        height: '400px',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 'auto'}}>
+      <div className={styles['spinner-container']}>
         <Spinner />
       </div>
     )
@@ -86,6 +93,13 @@ class StockPage extends Component {
           </div>
           <hr />
           <div>
+            <div className={styles['charttime-container']}>
+              <button className={styles['charttime-button']} onClick={() => this.onSelectCharttime('1m')}>1m</button>
+              <button className={styles['charttime-button']} onClick={() => this.onSelectCharttime('3m')}>3m</button>
+              <button className={styles['charttime-button']} onClick={() => this.onSelectCharttime('6m')}>6m</button>
+              <button className={styles['charttime-button']} onClick={() => this.onSelectCharttime('1y')}>1y</button>
+              <button className={styles['charttime-button']} onClick={() => this.onSelectCharttime('2y')}>2y</button>
+            </div>
             { chartEl }
             <p>Otwarcie | Maks. | Min. | Kapitalizacja | Wskaźnik C/Z</p>
             <p>Dywidenda | Poprz. zam. | Najw./52 tyg. | Najn./52 tyg.</p>

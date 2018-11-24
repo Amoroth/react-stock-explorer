@@ -8,6 +8,15 @@
   padding: 16px;
 }
 
+.spinner-container {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 .title-bar {
   display: flex;
   justify-content: space-between;
@@ -36,6 +45,25 @@
 
 .title-bar button:hover {
   color: gray;
+}
+
+.charttime-container {
+  display: flex;
+  margin: 0 20px;
+  border: 1px solid black;
+  border-right: none;
+}
+
+.charttime-button {
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  border-right: 1px solid #344955;
+  transition: background .1s;
+}
+
+.charttime-button:hover, :focus {
+  background-color: #bbddf1;
 }
 
 @media screen and (max-width: 620px) {
