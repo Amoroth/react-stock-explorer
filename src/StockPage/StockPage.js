@@ -26,62 +26,36 @@ class StockPage extends Component {
       week52High: 0,
       week52Low: 0
     },
-    chart: [{
-      "date": "2018-10-22",
-      "close": 219.8828,
-      "label": "Oct 22"
-      },
-      {
-      "date": "2018-10-23",
-      "close": 221.9556,
-      "label": "Oct 23"
-      },
-      {
-      "date": "2018-10-24",
-      "close": 214.3421,
-      "label": "Oct 24"
-      },
-      {
-      "date": "2018-10-25",
-      "close": 219.0358,
-      "label": "Oct 25"
-    }],
+    chart: [],
     chartTime: 0
   }
 
   componentDidMount() {
     const cmp = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
-    fetch(`https://api.iextrading.com/1.0/stock/${cmp}/quote?filter=symbol,companyName,primaryExchange,sector,open,close,high,low,previousClose,change,week52High,week52Low,latestUpdate,marketCap,peRatio`).then((res) => {
-      return res.json()
-    }).then((json) => {
-      this.setState({
-        book: json
-      })
-    })
-
-    // fetch(`https://api.iextrading.com/1.0/stock/${cmp}/chart?filter=date,close,label`).then((res) => {
-    //   return res.json()
-    // }).then((json) => {
-    //   this.setState({
-    //     chart: json
-    //   })
-    // })
+    this.updateBook(cmp)
+    this.updateChart(cmp, '1m')
   }
 
   componentDidUpdate() {
     const cmp = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
     if (cmp !== this.state.book.symbol) {
-      this.setState(() => {
-        return {book: {...this.state.book, symbol: cmp}}
-      })
+      this.updateBook(cmp)
     }
   }
 
-  onSelectCharttime = (time) => {
-    this.setState({
-      chart: []
-    })
-    fetch(`https://api.iextrading.com/1.0/stock/${this.state.book.symbol}/chart/${time}?filter=date,close,label`).then((res) => {
+  updateBook = (cmp) => {
+    fetch(`https://api.iextrading.com/1.0/stock/${cmp}/quote?filter=symbol,companyName,primaryExchange,sector,open,close,high,low,previousClose,change,week52High,week52Low,latestUpdate,marketCap,peRatio`)
+      .then((res) => {
+        return res.json()
+      }).then((json) => {
+        this.setState({
+          book: json
+        })
+      })
+  }
+
+  updateChart = (symbol, time) => {
+    fetch(`https://api.iextrading.com/1.0/stock/${symbol}/chart/${time}?filter=date,close,label`).then((res) => {
       return res.json()
     }).then((json) => {
       let timeNum = ['1m', '3m', '6m', '1y', '2y'].indexOf(time)
@@ -90,6 +64,13 @@ class StockPage extends Component {
         chartTime: timeNum
       })
     })
+  }
+
+  onSelectCharttime = (time) => {
+    this.setState({
+      chart: []
+    })
+    this.updateChart(this.state.book.symbol, time)
   }
 
   render() {

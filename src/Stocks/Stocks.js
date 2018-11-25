@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Panel from './Panel'
+import Spinner from '../shared/Spinner'
 import styles from './Stocks.module.css'
 
 class Stocks extends React.Component {
@@ -9,33 +10,12 @@ class Stocks extends React.Component {
     this.state = {
       stocks: [
         {
-          companyName: 'Alphabet Inc',
-          symbol: 'GOOGL',
+          companyName: 'Placeholder',
+          symbol: 'none',
           close: 1098.77,
           change: 0.0467,
           favorite: false
-        },
-        {
-          companyName: 'Microsoft Corporation',
-          symbol: 'MSFT',
-          close: 107.66,
-          change: 0.0377,
-          favorite: false
-        },
-        {
-          companyName: 'International Business Machines Corporation',
-          symbol: 'IBM',
-          close: 114.99,
-          change: -0.0037,
-          favorite: false
-        },
-        {
-          companyName: 'Twitter Inc',
-          symbol: 'TWTR',
-          close: 34.36,
-          change: -0.0112,
-          favorite: false
-        },
+        }
       ]
     }
   }
@@ -92,7 +72,7 @@ class Stocks extends React.Component {
     return (
       <div className={styles['container']}>
         {this.props.children}
-        {stocks}
+        {this.state.stocks[0].symbol === 'none' ? <Spinner /> : stocks}
       </div>
     )
   }
