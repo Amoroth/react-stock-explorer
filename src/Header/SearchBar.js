@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { createFilter } from 'react-search-input'
 import { Link } from 'react-router-dom'
 
+import Overlay from '../shared/Overlay'
 import styles from './Header.module.css'
 
 class SearchBar extends Component {
@@ -81,19 +82,19 @@ class SearchBar extends Component {
         </button>}
 
         <div className={styles['search-box-results']}>
-        {this.state.searchResults ? filteredCmps.slice(0, 4).map((cmp) => {
-          return (
-            <Link
-              className={styles['search-box-result']}
-              key={cmp.symbol}
-              onClick={() => this.onClickFill(cmp.name)}
-              to={`stock?cmp=${cmp.symbol}`}>
-              {cmp.name}
-              <span>{cmp.symbol}</span>
-            </Link>
-          )
-        }) : null}
+          {this.state.searchResults ? filteredCmps.slice(0, 4).map((cmp) => {
+            return (
+              <Link
+                className={styles['search-box-result']}
+                key={cmp.symbol}
+                onClick={() => this.onClickFill(cmp.name)}
+                to={`stock?cmp=${cmp.symbol}`}>
+                {cmp.name}
+                <span>{cmp.symbol}</span>
+              </Link>
+            )}) : null}
         </div>
+        {this.state.searchResults ? <Overlay /> : null}
       </div>
     )
   }

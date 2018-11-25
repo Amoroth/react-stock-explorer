@@ -57,3 +57,14 @@
     height: 5em;
   }
 }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 500;
+  background-color: #000;
+  opacity: 0.8;
+}
