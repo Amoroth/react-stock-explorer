@@ -34,6 +34,16 @@
   margin: 0 0 10px 0;
 }
 
+.panel-upper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-favorite {
+  background-color: transparent;
+  border: none;
+}
+
 @media screen and (max-width: 620px) {
   .container {
     width: 100%;
