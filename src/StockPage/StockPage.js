@@ -40,6 +40,7 @@ class StockPage extends Component {
     const cmp = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
     if (cmp !== this.state.book.symbol) {
       this.updateBook(cmp)
+      this.updateChart(cmp, '1m')
     }
   }
 

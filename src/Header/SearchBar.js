@@ -17,11 +17,11 @@ class SearchBar extends Component {
   }
 
   componentDidMount() {
-    // fetch('https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name').then((res) => {
-    //   return res.json()
-    // }).then((json) => {
-    //   this.setState({ symbols: json, searchBoxInput: window.innerWidth > 800 })
-    // })
+    fetch('https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name').then((res) => {
+      return res.json()
+    }).then((json) => {
+      this.setState({ symbols: json, searchBoxInput: window.innerWidth > 800 })
+    })
     this.setState({ symbols: [
       {name: 'Alphabet Inc.', symbol: 'googl'},
       {name: 'Microsoft Corporation', symbol: 'msft'},
@@ -29,6 +29,13 @@ class SearchBar extends Component {
       {name: 'Twitter Inc.', symbol: 'twtr'}
     ],
     searchBoxInput: window.innerWidth > 800 })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.input !== prevState.input) {
+      return true
+    }
+    return false
   }
 
   handleChange = (e) => {

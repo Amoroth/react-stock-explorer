@@ -85,4 +85,9 @@
   .title-bar button {
     visibility: hidden;
   }
+  .book-info {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    margin: 10px 0;
+  }
 }
