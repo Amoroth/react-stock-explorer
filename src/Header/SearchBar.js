@@ -94,7 +94,7 @@ class SearchBar extends Component {
               </Link>
             )}) : null}
         </div>
-        {this.state.searchResults ? <Overlay /> : null}
+        {this.state.searchResults && window.innerWidth < 800 ? <Overlay /> : null}
       </div>
     )
   }
