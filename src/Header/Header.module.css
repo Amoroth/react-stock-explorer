@@ -100,8 +100,12 @@
   transition: background .1s;
 }
 
+.search-box-result-active {
+  background-color: #bbddf1;
+}
+
 .search-box-result:hover {
-  background-color: #bbddf1
+  background-color: #bbddf1;
 }
 
 .search-box-result {

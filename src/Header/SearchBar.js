@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { createFilter } from 'react-search-input'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import Overlay from '../shared/Overlay'
 import styles from './Header.module.css'
@@ -13,6 +13,7 @@ class SearchBar extends Component {
       symbols: [],
       searchResults: false,
       searchBoxInput: false,
+      inputCursor: null,
     }
     this.inputRef = React.createRef();
   }
@@ -61,6 +62,27 @@ class SearchBar extends Component {
     })
   }
 
+  onKeyPressHandler = (e, symbols) => {
+    if (this.state.inputCursor > Math.min(3, symbols.length - 1)) {
+      this.setState({
+        inputCursor: Math.min(3, symbols.length - 1)
+      })
+    }
+    if (e.keyCode === 38 && this.state.inputCursor > 0) {
+      this.setState((prevState) => ({
+        inputCursor: (prevState.inputCursor || 0) - 1
+      }))
+    } else if (e.keyCode === 40 && this.state.inputCursor < Math.min(3, symbols.length - 1)) {
+      this.setState((prevState) => ({
+        inputCursor: prevState.inputCursor === null ? 0 : prevState.inputCursor + 1
+      }))
+    } else if (e.keyCode === 13) {
+      this.inputRef.current.blur()
+      this.onClickFill(symbols[this.state.inputCursor].name)
+      this.props.history.push(`stock?cmp=${symbols[this.state.inputCursor].symbol}`)
+    }
+  }
+
   render() {
     const filteredCmps = this.state.symbols.filter(
       createFilter(this.state.input, ['name', 'symbol'])
@@ -75,6 +97,7 @@ class SearchBar extends Component {
           value={this.state.input}
           onFocus={this.showSearchResults}
           onBlur={this.hideSearchResults}
+          onKeyUp={(e) => this.onKeyPressHandler(e, filteredCmps)}
           ref={this.inputRef}
         /> : 
         <button onClick={this.showSearchBoxInput} className={styles['search-box-icon']}>
@@ -82,13 +105,14 @@ class SearchBar extends Component {
         </button>}
 
         <div className={styles['search-box-results']}>
-          {this.state.searchResults ? filteredCmps.slice(0, 4).map((cmp) => {
+          {this.state.searchResults ? filteredCmps.slice(0, 4).map((cmp, idx) => {
             return (
               <Link
-                className={styles['search-box-result']}
+                className={`${styles['search-box-result']} ${this.state.inputCursor === idx ? styles['search-box-result-active'] : null}`}
                 key={cmp.symbol}
                 onClick={() => this.onClickFill(cmp.name)}
-                to={`stock?cmp=${cmp.symbol}`}>
+                to={`stock?cmp=${cmp.symbol}`}
+              >
                 {cmp.name}
                 <span>{cmp.symbol}</span>
               </Link>
@@ -100,4 +124,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar
+export default withRouter(SearchBar)
