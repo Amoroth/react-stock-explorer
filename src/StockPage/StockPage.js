@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Draggable from 'react-draggable'
 
 import StockChart from './StockChart'
 import Spinner from '../shared/Spinner'
@@ -6,10 +7,6 @@ import styles from './StockPage.module.css'
 
 class StockPage extends Component {
   state = {
-    name: 'International Business Machines Corporation',
-    short: '',
-    price: 159.51,
-    change: 0.0241,
     book: {
       symbol: '',
       companyName: '',
@@ -27,7 +24,8 @@ class StockPage extends Component {
       week52Low: 0
     },
     chart: [],
-    chartTime: 0
+    chartTime: 0,
+    relevant: [],
   }
 
   componentDidMount() {
@@ -38,7 +36,7 @@ class StockPage extends Component {
 
   componentDidUpdate() {
     const cmp = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
-    if (cmp !== this.state.book.symbol) {
+    if (cmp.toLowerCase() !== this.state.book.symbol.toLowerCase()) {
       this.updateBook(cmp)
       this.updateChart(cmp, '1m')
     }
@@ -52,6 +50,26 @@ class StockPage extends Component {
         this.setState({
           book: json
         })
+      })
+    fetch(`https://api.iextrading.com/1.0/stock/${cmp}/batch?types=quote,relevant`)
+      .then((res) => {
+        return res.json()
+      }).then((json) => {
+        fetch(`https://api.iextrading.com/1.0/stock/market/batch?types=quote&symbols=${json.relevant.symbols.join(',')}&filter=companyName,symbol,changePercent,close`)
+          .then((response) => {
+            return response.json()
+          }).then((endJson) => {
+            let relevantCompanies = []
+            for (let key in endJson) {
+              let tempCompany = {...endJson[key].quote}
+              tempCompany.symbol = key
+              relevantCompanies.push(tempCompany)
+            }
+            this.setState({
+              book: json.quote,
+              relevant: relevantCompanies
+            })
+          })
       })
   }
 
@@ -119,8 +137,39 @@ class StockPage extends Component {
           </div>
           <hr />
           <div>
-            <p>Sektor</p>
-            <p>Powiazane firmy</p>
+            {this.state.book.sector ? <p>Sector: {this.state.book.sector}</p> : <p>Relevant:</p>}
+            <div className={styles['relevant']}>
+              {/* <Swipeable
+                onSwipingLeft={this.onSwipeLeft}
+                onSwipingRight={this.onSwipeRight}
+                onSwiped={this.onSwipeEnd}
+                trackMouse={true}>
+                <div className={styles['relevant-inner']} style={{right: this.state.relevantPos}}>
+                  {this.state.relevant.map((val) => {
+                    return (
+                      <div className={styles['relavent-item']} key={val.symbol}>
+                        <h6>{val.symbol}</h6>
+                      </div>
+                    )
+                  })}
+                </div>
+              </Swipeable> */}
+              <Draggable
+                axis="x"
+                defaultPosition={{x: 0, y: 0}}
+                bounds={{left: -1010, right: 0}}
+              >
+                <div className={styles['relevant-inner']}>
+                  {this.state.relevant.map((val) => {
+                    return (
+                      <div className={styles['relavent-item']} key={val.symbol}>
+                        <h6>{val.symbol}</h6>
+                      </div>
+                    )
+                  })}
+                </div>
+              </Draggable>
+            </div>
           </div>
           <hr />
           <div>

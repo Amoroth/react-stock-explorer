@@ -34,6 +34,8 @@ class Stocks extends React.Component {
 
   loadFavorites = () => {
     console.log('loading favorites')
+
+    // fetch('https://api.iextrading.com/1.0/stock/market/batch?types=previous&symbols=aapl,msft,googl')
   }
 
   onFavorite = (event, symbol) => {

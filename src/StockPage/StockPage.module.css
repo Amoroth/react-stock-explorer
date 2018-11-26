@@ -78,6 +78,36 @@
   margin: 10px 20px;
 }
 
+.relevant {
+  width: 100%;
+  overflow: hidden;
+}
+
+.relevant-inner {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.relavent-item {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 16px;
+  transition: box-shadow .1s ease-in-out;
+  cursor: pointer;
+  flex-basis: 200px;
+  flex-shrink: 0;
+  margin: 10px;
+  box-shadow: 2px 4px 10px rgba(0,0,0,.1);
+  border: 1px solid #eee;
+  user-select: none;
+}
+
+.relavent-item:hover {
+  box-shadow: 2px 4px 10px rgba(0,0,0,.25);
+}
+
 @media screen and (max-width: 620px) {
   .container {
     width: 97%;
