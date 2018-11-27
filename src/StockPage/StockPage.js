@@ -102,7 +102,12 @@ class StockPage extends Component {
         <div className={styles['container']}>
           <div className={styles['title-bar']}>
             <div style={{display: 'flex'}}>
-              <img src={this.state.logo} height={56} alt={`${this.state.book.companyName}'s logo`} />
+              <img
+                src={this.state.logo}
+                height={56}
+                alt={`${this.state.book.companyName}'s logo`}
+                style={{maxWidth: '100px'}}
+              />
               <div>
                 <h6>{ this.state.book.companyName }</h6>
                 <span>{this.state.book.primaryExchange}: { this.state.book.symbol }</span>
@@ -160,7 +165,11 @@ class StockPage extends Component {
                           <span style={{color: val.changePercent > 0 ? 'green' : 'red'}}>
                             { priceChange }
                           </span>
-                          <Link to={`/stock?cmp=${val.symbol}`} onDragStart={(e) => e.preventDefault()}>More...</Link>
+                          <Link
+                            to={`/stock?cmp=${val.symbol}`}
+                            onDragStart={(e) => e.preventDefault()}
+                            onClick={() => window.scrollTo(0, 0)}
+                          >More...</Link>
                         </div>
                       </div>
                     )
