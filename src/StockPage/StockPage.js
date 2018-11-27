@@ -27,6 +27,7 @@ class StockPage extends Component {
     chart: [],
     chartTime: 0,
     relevant: [],
+    logo: ''
   }
 
   componentDidMount() {
@@ -44,15 +45,7 @@ class StockPage extends Component {
   }
 
   updateBook = (cmp) => {
-    fetch(`https://api.iextrading.com/1.0/stock/${cmp}/quote?filter=symbol,companyName,primaryExchange,sector,open,close,high,low,previousClose,change,week52High,week52Low,latestUpdate,marketCap,peRatio`)
-      .then((res) => {
-        return res.json()
-      }).then((json) => {
-        this.setState({
-          book: json
-        })
-      })
-    fetch(`https://api.iextrading.com/1.0/stock/${cmp}/batch?types=quote,relevant`)
+    fetch(`https://api.iextrading.com/1.0/stock/${cmp}/batch?types=quote,relevant,logo`)
       .then((res) => {
         return res.json()
       }).then((json) => {
@@ -68,7 +61,8 @@ class StockPage extends Component {
             }
             this.setState({
               book: json.quote,
-              relevant: relevantCompanies
+              relevant: relevantCompanies,
+              logo: json.logo.url
             })
           })
       })
@@ -107,9 +101,12 @@ class StockPage extends Component {
       (
         <div className={styles['container']}>
           <div className={styles['title-bar']}>
-            <div>
-              <h6>{ this.state.book.companyName }</h6>
-              <span>{this.state.book.primaryExchange}: { this.state.book.symbol }</span>
+            <div style={{display: 'flex'}}>
+              <img src={this.state.logo} height={56} />
+              <div>
+                <h6>{ this.state.book.companyName }</h6>
+                <span>{this.state.book.primaryExchange}: { this.state.book.symbol }</span>
+              </div>
             </div>
             <button onClick={() => this.props.history.push('/')}>
               <i className="material-icons md-48">arrow_back</i>
@@ -163,7 +160,7 @@ class StockPage extends Component {
                           <span style={{color: val.changePercent > 0 ? 'green' : 'red'}}>
                             { priceChange }
                           </span>
-                          <Link to="/" onDragStart={(e) => e.preventDefault()}>More...</Link>
+                          <Link to={`/stock?cmp=${val.symbol}`} onDragStart={(e) => e.preventDefault()}>More...</Link>
                         </div>
                       </div>
                     )
