@@ -102,7 +102,7 @@ class StockPage extends Component {
         <div className={styles['container']}>
           <div className={styles['title-bar']}>
             <div style={{display: 'flex'}}>
-              <img src={this.state.logo} height={56} />
+              <img src={this.state.logo} height={56} alt={`${this.state.book.companyName}'s logo`} />
               <div>
                 <h6>{ this.state.book.companyName }</h6>
                 <span>{this.state.book.primaryExchange}: { this.state.book.symbol }</span>

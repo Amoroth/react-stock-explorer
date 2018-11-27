@@ -99,13 +99,13 @@
   flex-basis: 200px;
   flex-shrink: 0;
   margin: 10px;
-  box-shadow: 2px 4px 10px rgba(0,0,0,.1);
+  box-shadow: 2px 4px 10px rgba(0,0,0,.08);
   border: 1px solid #eee;
   user-select: none;
 }
 
 .relavent-item:hover {
-  box-shadow: 2px 4px 10px rgba(0,0,0,.25);
+  box-shadow: 2px 4px 10px rgba(0,0,0,.15);
 }
 
 .relavent-item-row {
@@ -136,6 +136,11 @@
   padding-top: 14px;
   text-decoration: none;
   color: #344955;
+  transition: color .2s;
+}
+
+.relavent-item-info a:hover {
+  color: #388ec0;
 }
 
 @media screen and (max-width: 620px) {
