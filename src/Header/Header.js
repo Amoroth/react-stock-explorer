@@ -12,7 +12,7 @@ const header = (props) => {
 
   if (props.location.pathname === '/stock') {
     expandButton = (
-      <button className={styles['expand-button']} onClick={props.history.goBack}>
+      <button className={styles['expand-button']} onClick={() => props.history.push('/')}>
         <i className="material-icons">arrow_back</i>
       </button>
     )
