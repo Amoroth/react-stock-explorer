@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Draggable from 'react-draggable'
 import { Link } from 'react-router-dom'
 
+import PageTitle from '../shared/PageTitle'
 import StockChart from './StockChart'
 import Spinner from '../shared/Spinner'
 import styles from './StockPage.module.css'
@@ -100,23 +101,12 @@ class StockPage extends Component {
     return (
       (
         <div className={styles['container']}>
-          <div className={styles['title-bar']}>
-            <div style={{display: 'flex'}}>
-              <img
-                src={this.state.logo}
-                height={56}
-                alt={`${this.state.book.companyName}'s logo`}
-                style={{maxWidth: '100px'}}
-              />
-              <div>
-                <h6>{ this.state.book.companyName }</h6>
-                <span>{this.state.book.primaryExchange}: { this.state.book.symbol }</span>
-              </div>
-            </div>
-            <button onClick={() => this.props.history.push('/')}>
-              <i className="material-icons md-48">arrow_back</i>
-            </button>
-          </div>
+          <PageTitle
+            logo={this.state.logo}
+            name={this.state.book.companyName}
+            exchange={this.state.book.primaryExchange}
+            symbol={this.state.book.symbol}
+          />
           <hr />
           <div>
             <div className={styles['charttime-container']}>
