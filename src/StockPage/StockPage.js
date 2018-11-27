@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Draggable from 'react-draggable'
+import { Link } from 'react-router-dom'
 
 import StockChart from './StockChart'
 import Spinner from '../shared/Spinner'
@@ -139,21 +140,6 @@ class StockPage extends Component {
           <div>
             {this.state.book.sector ? <p>Sector: {this.state.book.sector}</p> : <p>Relevant:</p>}
             <div className={styles['relevant']}>
-              {/* <Swipeable
-                onSwipingLeft={this.onSwipeLeft}
-                onSwipingRight={this.onSwipeRight}
-                onSwiped={this.onSwipeEnd}
-                trackMouse={true}>
-                <div className={styles['relevant-inner']} style={{right: this.state.relevantPos}}>
-                  {this.state.relevant.map((val) => {
-                    return (
-                      <div className={styles['relavent-item']} key={val.symbol}>
-                        <h6>{val.symbol}</h6>
-                      </div>
-                    )
-                  })}
-                </div>
-              </Swipeable> */}
               <Draggable
                 axis="x"
                 defaultPosition={{x: 0, y: 0}}
@@ -161,9 +147,24 @@ class StockPage extends Component {
               >
                 <div className={styles['relevant-inner']}>
                   {this.state.relevant.map((val) => {
+                    let shortCompanyName = val.companyName
+                    let priceChange = `${val.changePercent > 0 ? '+' : ''}${(val.changePercent * 100).toFixed(2)}%`
+
+                    if (shortCompanyName.length > 14)
+                      shortCompanyName = shortCompanyName.slice(0, 12) + '...'
                     return (
                       <div className={styles['relavent-item']} key={val.symbol}>
-                        <h6>{val.symbol}</h6>
+                        <div className={`${styles['relavent-item-row']} ${styles['relavent-item-title']}`}>
+                          <h6 title={ shortCompanyName[shortCompanyName.length - 2] === '.' ? val.companyName : null }>{shortCompanyName}</h6>
+                          <span>{val.symbol}</span>
+                        </div>
+                        <div className={`${styles['relavent-item-row']} ${styles['relavent-item-info']}`}>
+                          <span>{val.close}</span>
+                          <span style={{color: val.changePercent > 0 ? 'green' : 'red'}}>
+                            { priceChange }
+                          </span>
+                          <Link to="/" onDragStart={(e) => e.preventDefault()}>More...</Link>
+                        </div>
                       </div>
                     )
                   })}
