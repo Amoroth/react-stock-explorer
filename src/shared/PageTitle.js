@@ -18,7 +18,7 @@ const pageTitle = (props) => {
           <span>{ props.exchange }: { props.symbol }</span>
         </div>
       </div>
-      <button onClick={ () => this.props.history.push('/') }>
+      <button onClick={ () => props.history.push('/') }>
         <i className="material-icons md-48">arrow_back</i>
       </button>
     </div>
