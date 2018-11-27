@@ -1,18 +1,21 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
+import SmallSpinner from './SmallSpinner'
 import styles from './shared.module.css'
 
 const pageTitle = (props) => {
   return (
     <div className={styles['title-bar']}>
       <div style={{ display: 'flex' }}>
+        {props.logo ? 
         <img
           src={props.logo}
           height={56}
           alt={`${props.name}'s logo`}
           style={{ maxWidth: '100px' }}
-        />
+        /> :
+        <SmallSpinner />}
         <div>
           <h6>{ props.name }</h6>
           <span>{ props.exchange }: { props.symbol }</span>
