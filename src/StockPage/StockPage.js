@@ -106,6 +106,7 @@ class StockPage extends Component {
             name={this.state.book.companyName}
             exchange={this.state.book.primaryExchange}
             symbol={this.state.book.symbol}
+            link
           />
           <hr />
           <div>
