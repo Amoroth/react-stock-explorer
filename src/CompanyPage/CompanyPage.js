@@ -6,21 +6,27 @@ import styles from './CompanyPage.module.css'
 class CompanyPage extends Component {
   state = {
     company: {
-      companyName: 'Netflix Inc.',
-      symbol: 'NFLX',
-      exchange: 'Nasdaq Global Select',
+      companyName: '',
+      symbol: '',
+      exchange: '',
       industry: '',
       website: '',
       description: '',
       CEO: '',
     },
-    logo: 'https://storage.googleapis.com/iex/api/logos/NFLX.png',
+    logo: '',
     financials: [
       {
         reportDate: '',
-        grossProfit: 0
+        grossProfit: 0,
+        totalRevenue: 0,
+        netIncome: 0,
+        researchAndDevelopment: 0,
+        totalAssets: 0,
+        totalDebt: 0
       }
-    ]
+    ],
+    finTime: 0
   }
 
   componentDidMount() {
@@ -36,8 +42,60 @@ class CompanyPage extends Component {
         })
       })
   }
+  
+  onSelectFintime = (index) => {
+    this.setState({
+      finTime: index
+    })
+  }
 
   render() {
+    let currentReport = {}
+    if (this.state.financials)
+      currentReport = Object.assign(this.state.financials[this.state.finTime])
+    for (let key in currentReport) {
+      if (typeof currentReport[key] !== 'number')
+        continue
+      
+      if (currentReport[key] / 1000000000 > 1) {
+        currentReport[key] = (currentReport[key] / 1000000000).toFixed(2) + ' mld'
+      } else if (currentReport[key] / 1000000 > 1) {
+        currentReport[key] = (currentReport[key] / 1000000).toFixed(2) + ' mln'
+      }
+    }
+
+    let financialsElement = null
+    if (this.state.financials) {
+      financialsElement = (
+        <React.Fragment>
+        <hr />
+        <div>
+          <div className={styles['fintime-container']}>
+            {this.state.financials.map((val, ind) => {
+              return (
+                <button
+                  className={`${styles['fintime-button']} ${this.state.finTime === ind ? styles['fintime-button-active'] : null}`}
+                  onClick={() => this.onSelectFintime(ind)}
+                  key={val.reportDate}
+                >
+                  { val.reportDate }
+                </button>
+              )
+            })}
+          </div>
+          <div className={styles['fin-info']}>
+            <span>Gross Profit:</span> <span>{currentReport.grossProfit}</span>
+            <span>Total Revenue:</span> <span>{currentReport.totalRevenue}</span>
+            <span>Net Income:</span> <span>{currentReport.netIncome}</span>
+            <span>R&D:</span> <span>{currentReport.researchAndDevelopment}</span>
+            <span>Total Assets:</span> <span>{currentReport.totalAssets}</span>
+            <span>Total Debt:</span> <span>{currentReport.totalDebt}</span>
+          </div>
+        </div>
+        </React.Fragment>
+      )
+    }
+
     return (
       <div className={styles['container']}>
         <PageTitle
@@ -57,10 +115,7 @@ class CompanyPage extends Component {
           </div>
           <p>{this.state.company.description || 'No Description.'}</p>
         </div>
-        <hr />
-        <div>
-          <p>Company Finances</p>
-        </div>
+        { financialsElement }
       </div>
     )
   }
