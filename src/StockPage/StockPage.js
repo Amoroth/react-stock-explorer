@@ -169,11 +169,6 @@ class StockPage extends Component {
               </Draggable>
             </div>
           </div>
-          <hr />
-          <div>
-            <p>Informacje Finansowe (osobne okno?)</p>
-            <p>O firmie (osobne okno?)</p>
-          </div>
         </div>
       )
     )
