@@ -28,8 +28,8 @@ const header = (props) => {
       </div>
       <div className={[styles['nav-links']].join(' ')}>
         <SearchBar />
-        <NavLink to="/" exact activeClassName={styles['nav-link-active']} className={navlinkStyle}>Home</NavLink>
-        <NavLink to="/error" activeClassName={styles['nav-link-active']} className={navlinkStyle}>Error</NavLink>
+        <NavLink to="/" exact activeClassName={styles['nav-link-active']} className={navlinkStyle}>Stocks</NavLink>
+        <NavLink to="/error" activeClassName={styles['nav-link-active']} className={navlinkStyle}>Cryptos</NavLink>
       </div>
     </nav>
   )
