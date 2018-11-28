@@ -131,3 +131,16 @@
 .title-bar button:hover {
   color: gray;
 }
+
+@media screen and (max-width: 800px) {
+  .title-bar button {
+    visibility: hidden;
+  }
+}
+@media screen and (max-width: 620px) {
+  .book-info {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    margin: 10px 0;
+  }
+}

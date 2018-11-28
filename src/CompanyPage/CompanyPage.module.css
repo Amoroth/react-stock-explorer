@@ -13,8 +13,25 @@
   justify-content: space-between;
 }
 
+.container a {
+  color: #344955;
+  transition: color .2s;
+}
+
+.container a:hover {
+  color: #75b8e2;
+}
+
 @media screen and (max-width: 620px) {
   .container {
     width: 97%;
+  }
+
+  .company-info-row {
+    flex-direction: column;
+  }
+
+  .company-info-row span {
+    margin: 10px 0;
   }
 }

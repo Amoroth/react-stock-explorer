@@ -50,6 +50,7 @@ class CompanyPage extends Component {
         <div>
           <div className={styles['company-info-row']}>
             <span>CEO: { this.state.company.CEO }</span>
+            <span>Industry: { this.state.company.industry }</span>
             <span>
               <a href={this.state.company.website}>Website</a>
             </span>

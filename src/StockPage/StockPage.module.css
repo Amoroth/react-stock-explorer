@@ -112,6 +112,12 @@
   color: #75b8e2;
 }
 
+@media screen and (max-width: 800px) {
+  .container {
+    width: 80%;
+  }
+}
+
 @media screen and (max-width: 620px) {
   .container {
     width: 97%;

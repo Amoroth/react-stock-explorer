@@ -10,9 +10,17 @@ const header = (props) => {
     <i className="material-icons">menu</i>
   </button>)
 
-  if (props.location.pathname === '/stock') {
+  const onBackClick = () => {
+    if (props.location.pathname === '/company') {
+      props.history.goBack()
+    } else {
+      props.history.push('/')
+    }
+  }
+
+  if (props.location.pathname !== '/') {
     expandButton = (
-      <button className={styles['expand-button']} onClick={() => props.history.push('/')}>
+      <button className={styles['expand-button']} onClick={onBackClick}>
         <i className="material-icons">arrow_back</i>
       </button>
     )
