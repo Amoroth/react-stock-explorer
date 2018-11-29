@@ -51,16 +51,16 @@ class CompanyPage extends Component {
 
   render() {
     let currentReport = {}
-    if (this.state.financials)
-      currentReport = Object.assign(this.state.financials[this.state.finTime])
+    if (this.state.financials) {
+      currentReport = Object.assign({}, this.state.financials[this.state.finTime])
+      delete currentReport.reportDate
+    }
+
     for (let key in currentReport) {
-      if (typeof currentReport[key] !== 'number')
-        continue
-      
-      if (currentReport[key] / 1000000000 > 1) {
-        currentReport[key] = (currentReport[key] / 1000000000).toFixed(2) + ' mld'
-      } else if (currentReport[key] / 1000000 > 1) {
-        currentReport[key] = (currentReport[key] / 1000000).toFixed(2) + ' mln'
+      if (Math.abs(currentReport[key]) / 1000000000 > 1) {
+        currentReport[key] = (Math.abs(currentReport[key]) / 1000000000).toFixed(2) + ' mld'
+      } else if (Math.abs(currentReport[key]) / 1000000 > 1) {
+        currentReport[key] = (Math.abs(currentReport[key]) / 1000000).toFixed(2) + ' mln'
       }
     }
 
@@ -84,12 +84,15 @@ class CompanyPage extends Component {
             })}
           </div>
           <div className={styles['fin-info']}>
-            <span>Gross Profit:</span> <span>{currentReport.grossProfit}</span>
-            <span>Total Revenue:</span> <span>{currentReport.totalRevenue}</span>
-            <span>Net Income:</span> <span>{currentReport.netIncome}</span>
-            <span>R&D:</span> <span>{currentReport.researchAndDevelopment}</span>
-            <span>Total Assets:</span> <span>{currentReport.totalAssets}</span>
-            <span>Total Debt:</span> <span>{currentReport.totalDebt}</span>
+            { Object.keys(currentReport).map((val) => {
+              let tempName = val.replace(/([A-Z])/g, " $1")
+              let labelName = tempName.charAt(0).toUpperCase() + tempName.slice(1)
+              return (
+                <React.Fragment key={val}>
+                  <span>{labelName}</span>
+                  <span>{currentReport[val] ? currentReport[val] : '-'}</span>
+                </React.Fragment>)
+            }) }
           </div>
         </div>
         </React.Fragment>

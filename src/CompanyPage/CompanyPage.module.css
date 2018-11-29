@@ -46,15 +46,27 @@
   border-bottom: 4px solid #344955;
 }
 
-.fin-info {
+/* .fin-info {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  margin: 20px 20px 0 20px;
+} */
+
+.fin-info {
+  display: flex;
+  flex-wrap: wrap;
   margin: 20px 20px 0 20px;
 }
 
 .fin-info span {
   margin-bottom: 16px;
+  flex-basis: 20%;
+}
+
+.fin-info span:nth-child(odd) {
+  margin-bottom: 16px;
+  flex-basis: 30%;
 }
 
 @media screen and (max-width: 620px) {
@@ -68,5 +80,18 @@
 
   .company-info-row span {
     margin: 10px 0;
+  }
+
+  .fintime-button {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .fin-info span {
+    flex-basis: 30%;
+  }
+
+  .fin-info span:nth-child(odd) {
+    flex-basis: 70%;
   }
 }
