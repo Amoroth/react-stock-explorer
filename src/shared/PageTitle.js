@@ -34,7 +34,12 @@ const pageTitle = (props) => {
           <h6
             onClick={ onTitleClick }
             style={{ cursor: props.link ? 'pointer' : 'default' }}
-          >{ props.name }</h6>
+          >
+            { props.name }
+            { props.link
+              ? <i className={'material-icons'} style={{color: 'gray', marginLeft: 10}}>info</i>
+              : null }
+          </h6>
           <span>{ props.exchange }: { props.symbol }</span>
         </div>
       </div>
