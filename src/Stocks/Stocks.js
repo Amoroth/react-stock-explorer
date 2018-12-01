@@ -5,29 +5,14 @@ import Spinner from '../shared/Spinner'
 import styles from './Stocks.module.css'
 
 class Stocks extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      stocks: [
-        {
-          companyName: 'Placeholder',
-          symbol: 'none',
-          close: 1098.77,
-          change: 0.0467,
-          favorite: false
-        }
-      ]
-    }
-  }
+  state = { stocks: [] }
 
   componentDidMount() {
-    fetch('https://api.iextrading.com/1.0/stock/market/list/infocus').then((res) => {
-      return res.json()
-    }).then((json) => {
-      this.setState({
-        stocks: json
+    fetch('https://api.iextrading.com/1.0/stock/market/list/infocus')
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({ stocks: json })
       })
-    })
 
     this.loadFavorites()
   }
@@ -41,7 +26,7 @@ class Stocks extends React.Component {
   onFavorite = (event, symbol) => {
     event.stopPropagation()
 
-    console.log('added to favorites')
+    console.log('added to favorites', symbol)
 
     // let newStocks = this.state.stocks.slice()
     // newStocks.forEach(element => {
@@ -60,21 +45,24 @@ class Stocks extends React.Component {
   }
 
   render() {
-    const stocks = this.state.stocks.map((val) => {
-      return <Panel 
-        title={val.companyName} 
-        short={val.symbol} 
-        price={val.close} 
-        change={val.changePercent} 
+    const { stocks } = this.state
+
+    const stocksElements = stocks.map((val) => (
+      <Panel
+        title={val.companyName}
+        short={val.symbol}
+        price={val.close}
+        change={val.changePercent}
         // favorite={val.favorite}
         key={val.symbol}
         onFav={this.onFavorite}
       />
-    })
+    ))
+
     return (
-      <div className={styles['container']}>
-        {this.props.children}
-        {this.state.stocks[0].symbol === 'none' ? <Spinner /> : stocks}
+      <div className={styles.container}>
+        <div />
+        {stocks.length < 1 ? <Spinner /> : stocksElements}
       </div>
     )
   }

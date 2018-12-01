@@ -108,13 +108,17 @@
   align-items: center;
 }
 
-.title-bar h6 {
+.title-bar h6, .title-bar a {
   font-size: 26px;
   margin: 0 10px;
   transition: color .2s;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
 }
 
-.title-link:hover {
+.title-bar a:hover {
   color: gray;
 }
 

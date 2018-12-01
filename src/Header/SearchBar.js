@@ -15,26 +15,32 @@ class SearchBar extends Component {
       searchBoxInput: false,
       inputCursor: null,
     }
-    this.inputRef = React.createRef();
+    this.inputRef = React.createRef()
   }
 
   componentDidMount() {
-    fetch('https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name').then((res) => {
-      return res.json()
-    }).then((json) => {
-      this.setState({ symbols: json, searchBoxInput: window.innerWidth > 800 })
+    fetch('https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name')
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          symbols: json,
+          searchBoxInput: window.innerWidth > 800,
+        })
+      })
+    this.setState({
+      symbols: [
+        { name: 'Alphabet Inc.', symbol: 'googl' },
+        { name: 'Microsoft Corporation', symbol: 'msft' },
+        { name: 'International Buissnes Machines Corporation', symbol: 'ibm' },
+        { name: 'Twitter Inc.', symbol: 'twtr' },
+      ],
+      searchBoxInput: window.innerWidth > 800,
     })
-    this.setState({ symbols: [
-      {name: 'Alphabet Inc.', symbol: 'googl'},
-      {name: 'Microsoft Corporation', symbol: 'msft'},
-      {name: 'International Buissnes Machines Corporation', symbol: 'ibm'},
-      {name: 'Twitter Inc.', symbol: 'twtr'}
-    ],
-    searchBoxInput: window.innerWidth > 800 })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.input !== prevState.input) {
+    const { input } = this.state
+    if (input !== prevState.input) {
       return true
     }
     return false
@@ -53,7 +59,12 @@ class SearchBar extends Component {
   }
 
   hideSearchResults = () => {
-    setTimeout(() => this.setState({ searchResults: false, searchBoxInput: window.innerWidth > 800 }), 100)
+    setTimeout(() => {
+      this.setState({
+        searchResults: false,
+        searchBoxInput: window.innerWidth > 800,
+      })
+    }, 100)
   }
 
   showSearchBoxInput = () => {
@@ -63,52 +74,74 @@ class SearchBar extends Component {
   }
 
   onKeyPressHandler = (e, symbols) => {
-    if (this.state.inputCursor > Math.min(3, symbols.length - 1)) {
-      this.setState({
-        inputCursor: Math.min(3, symbols.length - 1)
-      })
+    const { inputCursor } = this.state
+    const { history } = this.props
+
+    if (inputCursor > Math.min(3, symbols.length - 1)) {
+      this.setState({ inputCursor: Math.min(3, symbols.length - 1) })
     }
-    if (e.keyCode === 38 && this.state.inputCursor > 0) {
+    if (e.keyCode === 38 && inputCursor > 0) {
+      this.setState((prevState) => {
+        const newInputCursor = (prevState.inputCursor || 0) - 1
+        return { inputCursor: newInputCursor }
+      })
+    } else if (
+      e.keyCode === 40
+      && inputCursor < Math.min(3, symbols.length - 1)
+    ) {
       this.setState((prevState) => ({
-        inputCursor: (prevState.inputCursor || 0) - 1
-      }))
-    } else if (e.keyCode === 40 && this.state.inputCursor < Math.min(3, symbols.length - 1)) {
-      this.setState((prevState) => ({
-        inputCursor: prevState.inputCursor === null ? 0 : prevState.inputCursor + 1
+        inputCursor:
+          prevState.inputCursor === null ? 0 : prevState.inputCursor + 1,
       }))
     } else if (e.keyCode === 13) {
       this.inputRef.current.blur()
-      this.onClickFill(symbols[this.state.inputCursor].name)
-      this.props.history.push(`stock?cmp=${symbols[this.state.inputCursor].symbol}`)
+      this.onClickFill(symbols[inputCursor].name)
+      history.push(`stock?cmp=${symbols[inputCursor].symbol}`)
     }
   }
 
   render() {
-    const filteredCmps = this.state.symbols.filter(
-      createFilter(this.state.input, ['name', 'symbol'])
-    )
+    const {
+      symbols,
+      input,
+      inputCursor,
+      searchBoxInput,
+      searchResults,
+    } = this.state
+
+    const filteredCmps = symbols.filter(createFilter(input, ['name', 'symbol']))
 
     return (
-      <div style={{display: 'inline'}}>
-        {this.state.searchBoxInput ? 
-        <input
-          className={styles['search-box']}
-          onChange={this.handleChange}
-          value={this.state.input}
-          onFocus={this.showSearchResults}
-          onBlur={this.hideSearchResults}
-          onKeyUp={(e) => this.onKeyPressHandler(e, filteredCmps)}
-          ref={this.inputRef}
-        /> : 
-        <button onClick={this.showSearchBoxInput} className={styles['search-box-icon']}>
-          <i className="material-icons">search</i>
-        </button>}
+      <div style={{ display: 'inline' }}>
+        {searchBoxInput ? (
+          <input
+            className={styles['search-box']}
+            onChange={this.handleChange}
+            value={input}
+            onFocus={this.showSearchResults}
+            onBlur={this.hideSearchResults}
+            onKeyUp={(e) => this.onKeyPressHandler(e, filteredCmps)}
+            ref={this.inputRef}
+          />
+        ) : (
+          <button
+            onClick={this.showSearchBoxInput}
+            className={styles['search-box-icon']}
+            type="button"
+          >
+            <i className="material-icons">search</i>
+          </button>
+        )}
 
         <div className={styles['search-box-results']}>
-          {this.state.searchResults ? filteredCmps.slice(0, 4).map((cmp, idx) => {
-            return (
+          {searchResults
+            ? filteredCmps.slice(0, 4).map((cmp, idx) => (
               <Link
-                className={`${styles['search-box-result']} ${this.state.inputCursor === idx ? styles['search-box-result-active'] : null}`}
+                className={`${styles['search-box-result']} ${
+                  inputCursor === idx
+                    ? styles['search-box-result-active']
+                    : null
+                }`}
                 key={cmp.symbol}
                 onClick={() => this.onClickFill(cmp.name)}
                 to={`stock?cmp=${cmp.symbol}`}
@@ -116,9 +149,10 @@ class SearchBar extends Component {
                 {cmp.name}
                 <span>{cmp.symbol}</span>
               </Link>
-            )}) : null}
+            ))
+            : null}
         </div>
-        {this.state.searchResults && window.innerWidth < 800 ? <Overlay /> : null}
+        {searchResults && window.innerWidth < 800 ? <Overlay /> : null}
       </div>
     )
   }

@@ -1,50 +1,56 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import SmallSpinner from './SmallSpinner'
 import styles from './shared.module.css'
 
 const pageTitle = (props) => {
-  const onTitleClick = () => {
-    if (props.link) {
-      props.history.push(`/company?cmp=${props.symbol}`)
+  const { logo, name, link, history, exchange, symbol } = props
+
+  const onBackClick = () => {
+    if (link) {
+      history.push('/')
+    } else {
+      history.goBack()
     }
   }
 
-  const onBackClick = () => {
-    if (props.link) {
-      props.history.push('/')
-    } else {
-      props.history.goBack()
-    }
+  let titleEl = <h6>{name}</h6>
+  if (link) {
+    titleEl = (
+      <Link to={`/company?cmp=${props.symbol}`} style={{ cursor: 'pointer' }}>
+        {props.name}
+        {props.name ? (
+          <i
+            className="material-icons"
+            style={{ color: 'gray', marginLeft: 10 }}
+          >
+            info
+          </i>
+        ) : null}
+      </Link>
+    )
   }
 
   return (
     <div className={styles['title-bar']}>
       <div style={{ display: 'flex' }}>
-        {props.logo ? 
-        <img
-          src={props.logo}
-          height={56}
-          alt={`${props.name}'s logo`}
-          style={{ maxWidth: '100px' }}
-        /> :
-        <SmallSpinner />}
+        {logo ? (
+          <img
+            src={logo}
+            height={56}
+            alt={`${name}'s logo`}
+            style={{ maxWidth: '100px' }}
+          />
+        ) : (
+          <SmallSpinner />
+        )}
         <div>
-          <h6
-            onClick={ onTitleClick }
-            className={ props.link ? styles['title-link'] : null }
-            style={{ cursor: props.link ? 'pointer' : 'default' }}
-          >
-            { props.name }
-            { props.link
-              ? <i className={'material-icons'} style={{color: 'gray', marginLeft: 10}}>info</i>
-              : null }
-          </h6>
-          <span>{ props.exchange }: { props.symbol }</span>
+          {titleEl}
+          <span>{symbol ? `${exchange}: ${symbol}` : null}</span>
         </div>
       </div>
-      <button onClick={ onBackClick }>
+      <button onClick={onBackClick} type="button">
         <i className="material-icons md-48">arrow_back</i>
       </button>
     </div>

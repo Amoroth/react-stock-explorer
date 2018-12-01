@@ -1,0 +1,15 @@
+{
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "rules": {
+        "semi": "off",
+        "arrow-parens": ["error", "always"],
+        "object-curly-newline": ["error", { "multiline": true }],
+        "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+        "react/no-unused-state": false
+    },
+    "env": {
+        "browser": true,
+        "jest": true
+    }
+}

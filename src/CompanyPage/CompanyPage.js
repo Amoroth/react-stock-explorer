@@ -23,102 +23,118 @@ class CompanyPage extends Component {
         netIncome: 0,
         researchAndDevelopment: 0,
         totalAssets: 0,
-        totalDebt: 0
-      }
+        totalDebt: 0,
+      },
     ],
-    finTime: 0
+    finTime: 0,
   }
 
   componentDidMount() {
-    const companyQuery = new URLSearchParams(this.props.location.search.slice(1)).get('cmp')
-    fetch(`https://api.iextrading.com/1.0/stock/${companyQuery}/batch?types=company,logo,financials`)
-      .then((res) => {
-        return res.json()
-      }).then((json) => {
+    const { location } = this.props
+    const companyQuery = new URLSearchParams(location.search.slice(1)).get(
+      'cmp',
+    )
+    fetch(
+      `https://api.iextrading.com/1.0/stock/${companyQuery}/batch?types=company,logo,financials`,
+    )
+      .then((res) => res.json())
+      .then((json) => {
         this.setState({
           company: json.company,
           logo: json.logo.url,
-          financials: json.financials.financials
+          financials: json.financials.financials,
         })
       })
   }
-  
+
   onSelectFintime = (index) => {
-    this.setState({
-      finTime: index
-    })
+    this.setState({ finTime: index })
   }
 
   render() {
+    const { financials, finTime, logo, company } = this.state
+
     let currentReport = {}
-    if (this.state.financials) {
-      currentReport = Object.assign({}, this.state.financials[this.state.finTime])
+    if (financials) {
+      currentReport = Object.assign({}, financials[finTime])
       delete currentReport.reportDate
     }
 
-    for (let key in currentReport) {
-      if (Math.abs(currentReport[key]) / 1000000000 > 1) {
-        currentReport[key] = (Math.abs(currentReport[key]) / 1000000000).toFixed(2) + ' mld'
+    Object.keys(currentReport).forEach((key) => {
+      if (Math.abs() / 1000000000 > 1) {
+        currentReport[key] = `${(
+          Math.abs(currentReport[key]) / 1000000000
+        ).toFixed(2)} mld`
       } else if (Math.abs(currentReport[key]) / 1000000 > 1) {
-        currentReport[key] = (Math.abs(currentReport[key]) / 1000000).toFixed(2) + ' mln'
+        currentReport[key] = `${(
+          Math.abs(currentReport[key]) / 1000000
+        ).toFixed(2)} mln`
       }
-    }
+    })
 
     let financialsElement = null
-    if (this.state.financials) {
+    if (financials) {
       financialsElement = (
         <React.Fragment>
-        <hr />
-        <div>
-          <div className={styles['fintime-container']}>
-            {this.state.financials.map((val, ind) => {
-              return (
+          <hr />
+          <div>
+            <div className={styles['fintime-container']}>
+              {financials.map((val, ind) => (
                 <button
-                  className={`${styles['fintime-button']} ${this.state.finTime === ind ? styles['fintime-button-active'] : null}`}
+                  className={`${styles['fintime-button']} ${
+                    finTime === ind ? styles['fintime-button-active'] : null
+                  }`}
+                  type="button"
                   onClick={() => this.onSelectFintime(ind)}
                   key={val.reportDate}
                 >
-                  { val.reportDate }
+                  {val.reportDate}
                 </button>
-              )
-            })}
+              ))}
+            </div>
+            <div className={styles['fin-info']}>
+              {Object.keys(currentReport).map((val) => {
+                const tempName = val.replace(/([A-Z])/g, ' $1')
+                const labelName = tempName.charAt(0).toUpperCase() + tempName.slice(1)
+                return (
+                  <React.Fragment key={val}>
+                    <span>{labelName}</span>
+                    <span>{currentReport[val] ? currentReport[val] : '-'}</span>
+                  </React.Fragment>
+                )
+              })}
+            </div>
           </div>
-          <div className={styles['fin-info']}>
-            { Object.keys(currentReport).map((val) => {
-              let tempName = val.replace(/([A-Z])/g, " $1")
-              let labelName = tempName.charAt(0).toUpperCase() + tempName.slice(1)
-              return (
-                <React.Fragment key={val}>
-                  <span>{labelName}</span>
-                  <span>{currentReport[val] ? currentReport[val] : '-'}</span>
-                </React.Fragment>)
-            }) }
-          </div>
-        </div>
         </React.Fragment>
       )
     }
 
     return (
-      <div className={styles['container']}>
+      <div className={styles.container}>
         <PageTitle
-          logo={this.state.logo}
-          name={this.state.company.companyName}
-          exchange={this.state.company.exchange}
-          symbol={this.state.company.symbol}
+          logo={logo}
+          name={company.companyName}
+          exchange={company.exchange}
+          symbol={company.symbol}
         />
         <hr />
         <div>
           <div className={styles['company-info-row']}>
-            <span>CEO: { this.state.company.CEO }</span>
-            <span>Industry: { this.state.company.industry }</span>
             <span>
-              <a href={this.state.company.website}>Website</a>
+              CEO:
+              {company.CEO}
+            </span>
+            <span>
+              Industry:
+              {company.industry}
+            </span>
+            <span>
+              <a href={company.website}>Website</a>
             </span>
           </div>
-          <p>{this.state.company.description || 'No Description.'}</p>
+          <p>{company.description || 'No Description.'}</p>
         </div>
-        { financialsElement }
+        {financialsElement}
       </div>
     )
   }

@@ -4,40 +4,58 @@ import { withRouter, NavLink } from 'react-router-dom'
 import SearchBar from './SearchBar'
 import styles from './Header.module.css'
 
-const header = (props) => {
+const header = ({ location, history }) => {
   let expandButton = (
-  <button className={styles['expand-button']}>
-    <i className="material-icons">menu</i>
-  </button>)
+    <button className={styles['expand-button']} type="button">
+      <i className="material-icons">menu</i>
+    </button>
+  )
 
   const onBackClick = () => {
-    if (props.location.pathname === '/company') {
-      props.history.goBack()
+    if (location.pathname === '/company') {
+      history.goBack()
     } else {
-      props.history.push('/')
+      history.push('/')
     }
   }
 
-  if (props.location.pathname !== '/') {
+  if (location.pathname !== '/') {
     expandButton = (
-      <button className={styles['expand-button']} onClick={onBackClick}>
+      <button
+        className={styles['expand-button']}
+        onClick={onBackClick}
+        type="button"
+      >
         <i className="material-icons">arrow_back</i>
       </button>
     )
   }
 
-  let navlinkStyle = [styles['nav-link'], styles['desktop-only']].join(' ')
+  const navlinkStyle = [styles['nav-link'], styles['desktop-only']].join(' ')
 
   return (
-    <nav className={styles['container']}>
+    <nav className={styles.container}>
       <div className={styles['brand-container']}>
-        { expandButton }
-        <h6 className={styles['brand']}>Stock Explorer!</h6>
+        {expandButton}
+        <h6 className={styles.brand}>Stock Explorer!</h6>
       </div>
       <div className={[styles['nav-links']].join(' ')}>
         <SearchBar />
-        <NavLink to="/" exact activeClassName={styles['nav-link-active']} className={navlinkStyle}>Stocks</NavLink>
-        <NavLink to="/error" activeClassName={styles['nav-link-active']} className={navlinkStyle}>Cryptos</NavLink>
+        <NavLink
+          to="/"
+          exact
+          activeClassName={styles['nav-link-active']}
+          className={navlinkStyle}
+        >
+          Stocks
+        </NavLink>
+        <NavLink
+          to="/error"
+          activeClassName={styles['nav-link-active']}
+          className={navlinkStyle}
+        >
+          Cryptos
+        </NavLink>
       </div>
     </nav>
   )

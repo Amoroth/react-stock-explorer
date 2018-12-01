@@ -2,10 +2,6 @@ import React from 'react'
 
 import styles from './shared.module.css'
 
-const overlay = (props) => {
-  return (
-    <div className={styles['overlay']}></div>
-  )
-}
+const overlay = () => <div className={styles.overlay} />
 
 export default overlay
