@@ -33,6 +33,7 @@ const pageTitle = (props) => {
         <div>
           <h6
             onClick={ onTitleClick }
+            className={ props.link ? styles['title-link'] : null }
             style={{ cursor: props.link ? 'pointer' : 'default' }}
           >
             { props.name }
