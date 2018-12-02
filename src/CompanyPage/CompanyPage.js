@@ -62,10 +62,6 @@ class CompanyPage extends Component {
       delete currentReport.reportDate
     }
 
-    Object.keys(currentReport).forEach((key) => {
-      currentReport[key] = numberFormater(currentReport[key])
-    })
-
     let financialsElement = null
     if (financials) {
       financialsElement = (
@@ -93,7 +89,7 @@ class CompanyPage extends Component {
                 return (
                   <React.Fragment key={val}>
                     <span>{labelName}</span>
-                    <span>{currentReport[val] ? currentReport[val] : '-'}</span>
+                    <span>{currentReport[val] ? `${numberFormater(currentReport[val])} USD` : '-'}</span>
                   </React.Fragment>
                 )
               })}
