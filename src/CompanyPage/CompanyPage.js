@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import PageTitle from '../shared/PageTitle'
 import styles from './CompanyPage.module.css'
@@ -139,5 +140,7 @@ class CompanyPage extends Component {
     )
   }
 }
+
+CompanyPage.propTypes = { location: PropTypes.objectOf(PropTypes.string).isRequired }
 
 export default CompanyPage

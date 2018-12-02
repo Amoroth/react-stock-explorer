@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme } from 'victory'
 
 const stockChart = ({ data }) => {
@@ -51,6 +52,14 @@ const stockChart = ({ data }) => {
       </VictoryChart>
     </svg>
   )
+}
+
+stockChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    close: PropTypes.number.isRequired,
+    label: PropTypes.string.isRequired,
+    date: PropTypes.string,
+  })).isRequired,
 }
 
 export default stockChart

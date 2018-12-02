@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Draggable from 'react-draggable'
 import { Link } from 'react-router-dom'
 
@@ -245,5 +246,7 @@ class StockPage extends Component {
     )
   }
 }
+
+StockPage.propTypes = { location: PropTypes.objectOf(PropTypes.string).isRequired }
 
 export default StockPage

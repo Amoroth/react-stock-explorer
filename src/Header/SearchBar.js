@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { createFilter } from 'react-search-input'
 import { Link, withRouter } from 'react-router-dom'
 
@@ -157,5 +158,7 @@ class SearchBar extends Component {
     )
   }
 }
+
+SearchBar.propTypes = { history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired }
 
 export default withRouter(SearchBar)

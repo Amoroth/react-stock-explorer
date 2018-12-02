@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 
 import SmallSpinner from './SmallSpinner'
@@ -56,5 +57,22 @@ const pageTitle = (props) => {
     </div>
   )
 }
+
+pageTitle.propTypes = {
+  logo: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  link: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+  ]),
+  symbol: PropTypes.string.isRequired,
+  exchange: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+}
+
+pageTitle.defaultProps = { link: false }
 
 export default withRouter(pageTitle)

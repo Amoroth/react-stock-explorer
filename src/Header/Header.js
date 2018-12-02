@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter, NavLink } from 'react-router-dom'
 
 import SearchBar from './SearchBar'
@@ -59,6 +60,14 @@ const header = ({ location, history }) => {
       </div>
     </nav>
   )
+}
+
+header.propTypes = {
+  location: PropTypes.objectOf(PropTypes.string).isRequired,
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
 export default withRouter(header)

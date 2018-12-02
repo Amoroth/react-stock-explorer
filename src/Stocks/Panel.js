@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 import styles from './Stocks.module.css'
@@ -55,5 +56,17 @@ const panel = ({ change, title, short, favorite, onFav, price, history }) => {
     </div>
   )
 }
+
+panel.propTypes = {
+  change: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  short: PropTypes.string.isRequired,
+  favorite: PropTypes.bool,
+  onFav: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+  price: PropTypes.number.isRequired,
+}
+
+panel.defaultProps = { favorite: false }
 
 export default withRouter(panel)
