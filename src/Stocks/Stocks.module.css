@@ -54,6 +54,17 @@
   border: none;
 }
 
+.no-favorites {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 4px 10px rgba(0,0,0,.0125);
+  font-size: 15px;
+  margin: auto;
+  padding: 16px 32px;
+  width: 97%;
+  text-align: center;
+}
+
 @media screen and (max-width: 620px) {
   .container {
     width: 100%;

@@ -8,15 +8,18 @@ import styles from './Stocks.module.css'
 class Stocks extends React.Component {
   state = {
     stocks: [],
+    favorites: [],
     market: 'infocus',
   }
 
   componentDidMount() {
+    const favorites = localStorage.getItem('stock-explorer_favorites')
     const { market } = this.state
+
     fetch(`https://api.iextrading.com/1.0/stock/market/list/${market}`)
       .then((res) => res.json())
       .then((json) => {
-        this.setState({ stocks: json })
+        this.setState({ stocks: json, favorites })
       })
   }
 
@@ -29,7 +32,7 @@ class Stocks extends React.Component {
       this.loadFavorites()
       return
     }
-    fetch(`https://api.iextrading.com/1.0/stock/market/list/${newMarket}`)
+    fetch(`https://api.iextrading.com/1.0/stock/market/list/${newMarket}?filter=companyName,symbol,close,changePercent`)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -40,46 +43,59 @@ class Stocks extends React.Component {
   }
 
   loadFavorites = () => {
-    console.log('loading favorites')
-
-    // fetch('https://api.iextrading.com/1.0/stock/market/batch?types=previous&symbols=aapl,msft,googl')
+    const favorites = localStorage.getItem('stock-explorer_favorites')
+    if (!favorites) {
+      this.setState({
+        stocks: [],
+        market: 'favorites',
+      })
+      return
+    }
+    fetch(`https://api.iextrading.com/1.0/stock/market/batch?types=quote&symbols=${favorites}&filter=companyName,symbol,close,changePercent`)
+      .then((res) => res.json())
+      .then((json) => {
+        const newStocks = Object.keys(json).map((val) => json[val].quote)
+        this.setState({
+          stocks: newStocks,
+          market: 'favorites',
+          favorites: favorites.split(','),
+        })
+      })
   }
 
   onFavorite = (event, symbol) => {
     event.stopPropagation()
+    let { favorites } = this.state
+    favorites = favorites || []
 
-    console.log('added to favorites', symbol)
-
-    // let newStocks = this.state.stocks.slice()
-    // newStocks.forEach(element => {
-    //   if (element.short === symbol)
-    //     element.favorite = !element.favorite
-    // })
-    // this.setState({
-    //   stocks: newStocks
-    // }, () => {
-    //   localStorage.setItem('stock-explorer_favorites', this.state.stocks.reduce((arr, val) => {
-    //     if (val.favorite)
-    //       arr.push(val.symbol)
-    //     return arr
-    //   }, []))
-    // })
+    if (!favorites.includes(symbol)) {
+      const newFavorites = [...favorites, symbol]
+      this.setState({ favorites: newFavorites }, () => localStorage.setItem('stock-explorer_favorites', newFavorites))
+    } else {
+      const newFavorites = favorites.filter((val) => val !== symbol)
+      this.setState({ favorites: newFavorites }, () => localStorage.setItem('stock-explorer_favorites', newFavorites))
+    }
   }
 
   render() {
-    const { stocks } = this.state
+    const { stocks, favorites, market } = this.state
 
-    const stocksElements = stocks.map((val) => (
-      <Panel
-        title={val.companyName}
-        short={val.symbol}
-        price={val.close}
-        change={val.changePercent}
-        // favorite={val.favorite}
-        key={val.symbol}
-        onFav={this.onFavorite}
-      />
-    ))
+    let stockElements = <Spinner />
+    if (stocks.length > 1) {
+      stockElements = stocks.map((val) => (
+        <Panel
+          title={val.companyName}
+          short={val.symbol}
+          price={val.close}
+          change={val.changePercent}
+          favorite={favorites ? favorites.includes(val.symbol) : false}
+          key={val.symbol}
+          onFav={this.onFavorite}
+        />
+      ))
+    } else if (market === 'favorites') {
+      stockElements = <h4 className={styles['no-favorites']}>No Favorites! Add some by pressing the heart button</h4>
+    }
 
     const markets = ['In Focus', 'Favorites', 'Gainers', 'Losers']
     const marketButtons = markets.map((val) => {
@@ -100,7 +116,7 @@ class Stocks extends React.Component {
           {marketButtons}
         </div>
         <div className={styles['stocks-container']}>
-          {stocks.length < 1 ? <Spinner /> : stocksElements}
+          {stockElements}
         </div>
       </div>
     )
