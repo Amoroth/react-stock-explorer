@@ -19,7 +19,7 @@ class Stocks extends React.Component {
     fetch(`https://api.iextrading.com/1.0/stock/market/list/${market}`)
       .then((res) => res.json())
       .then((json) => {
-        this.setState({ stocks: json, favorites })
+        this.setState({ stocks: json, favorites: favorites.split(',') })
       })
   }
 
@@ -32,7 +32,8 @@ class Stocks extends React.Component {
       this.loadFavorites()
       return
     }
-    fetch(`https://api.iextrading.com/1.0/stock/market/list/${newMarket}?filter=companyName,symbol,close,changePercent`)
+    // filter does not work
+    fetch(`https://api.iextrading.com/1.0/stock/market/list/${newMarket}`)
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -65,8 +66,7 @@ class Stocks extends React.Component {
 
   onFavorite = (event, symbol) => {
     event.stopPropagation()
-    let { favorites } = this.state
-    favorites = favorites || []
+    const { favorites } = this.state
 
     if (!favorites.includes(symbol)) {
       const newFavorites = [...favorites, symbol]
@@ -88,7 +88,7 @@ class Stocks extends React.Component {
           short={val.symbol}
           price={val.close}
           change={val.changePercent}
-          favorite={favorites ? favorites.includes(val.symbol) : false}
+          favorite={favorites.includes(val.symbol)}
           key={val.symbol}
           onFav={this.onFavorite}
         />
