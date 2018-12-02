@@ -141,6 +141,15 @@
   color: gray;
 }
 
+.circular-button {
+  background-color: #fff;
+  font-size: 1em;
+  border: 2px outset #75b8e2;
+  padding: 8px 16px;
+  color: #000;
+  border-radius: 30px;
+}
+
 @media screen and (max-width: 800px) {
   .title-bar button {
     visibility: hidden;
@@ -151,5 +160,10 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(6, 1fr);
     margin: 10px 0;
+  }
+
+  .circular-button {
+    padding: 8px 8px;
+    font-size: .8em;
   }
 }

@@ -1,20 +1,42 @@
 import React from 'react'
 
 import Panel from './Panel'
+import CircularButton from '../shared/CircularButton'
 import Spinner from '../shared/Spinner'
 import styles from './Stocks.module.css'
 
 class Stocks extends React.Component {
-  state = { stocks: [] }
+  state = {
+    stocks: [],
+    market: 'infocus',
+  }
 
   componentDidMount() {
-    fetch('https://api.iextrading.com/1.0/stock/market/list/infocus')
+    const { market } = this.state
+    fetch(`https://api.iextrading.com/1.0/stock/market/list/${market}`)
       .then((res) => res.json())
       .then((json) => {
         this.setState({ stocks: json })
       })
+  }
 
-    this.loadFavorites()
+  onMarketChange = (newMarket) => {
+    const { market } = this.state
+    if (market === newMarket) {
+      return
+    }
+    if (newMarket === 'favorites') {
+      this.loadFavorites()
+      return
+    }
+    fetch(`https://api.iextrading.com/1.0/stock/market/list/${newMarket}`)
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({
+          stocks: json,
+          market: newMarket,
+        })
+      })
   }
 
   loadFavorites = () => {
@@ -59,10 +81,27 @@ class Stocks extends React.Component {
       />
     ))
 
+    const markets = ['In Focus', 'Favorites', 'Gainers', 'Losers']
+    const marketButtons = markets.map((val) => {
+      const linkname = val.replace(' ', '').toLowerCase()
+      return (
+        <CircularButton
+          func={() => this.onMarketChange(linkname)}
+          key={linkname}
+        >
+          {val}
+        </CircularButton>
+      )
+    })
+
     return (
       <div className={styles.container}>
-        <div />
-        {stocks.length < 1 ? <Spinner /> : stocksElements}
+        <div className={styles['markets-container']}>
+          {marketButtons}
+        </div>
+        <div className={styles['stocks-container']}>
+          {stocks.length < 1 ? <Spinner /> : stocksElements}
+        </div>
       </div>
     )
   }

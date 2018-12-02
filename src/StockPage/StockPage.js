@@ -121,6 +121,7 @@ class StockPage extends Component {
             chartTime === ind ? styles['charttime-button-active'] : null
           }`}
           onClick={() => this.onSelectCharttime(val)}
+          key={val}
         >
           {val}
         </button>
@@ -153,7 +154,7 @@ class StockPage extends Component {
         const tempName = key.replace(/([A-Z])/g, ' $1')
         const labelName = tempName.charAt(0).toUpperCase() + tempName.slice(1)
         return (
-          <React.Fragment>
+          <React.Fragment key={key}>
             <span>
               {`${labelName}:`}
             </span>
