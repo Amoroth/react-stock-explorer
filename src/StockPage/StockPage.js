@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Draggable from 'react-draggable'
 import { Link } from 'react-router-dom'
 
+import { numberFormater } from '../shared/utils'
 import PageTitle from '../shared/PageTitle'
 import StockChart from './StockChart'
 import Spinner from '../shared/Spinner'
@@ -156,7 +157,7 @@ class StockPage extends Component {
             <span>
               {`${labelName}:`}
             </span>
-            <span>{`${newBook[key]} USD`}</span>
+            <span>{`${numberFormater(newBook[key])} USD`}</span>
           </React.Fragment>
         )
       })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { numberFormater } from '../shared/utils'
 import PageTitle from '../shared/PageTitle'
 import styles from './CompanyPage.module.css'
 
@@ -62,15 +63,7 @@ class CompanyPage extends Component {
     }
 
     Object.keys(currentReport).forEach((key) => {
-      if (Math.abs() / 1000000000 > 1) {
-        currentReport[key] = `${(
-          Math.abs(currentReport[key]) / 1000000000
-        ).toFixed(2)} mld`
-      } else if (Math.abs(currentReport[key]) / 1000000 > 1) {
-        currentReport[key] = `${(
-          Math.abs(currentReport[key]) / 1000000
-        ).toFixed(2)} mln`
-      }
+      currentReport[key] = numberFormater(currentReport[key])
     })
 
     let financialsElement = null
