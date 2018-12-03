@@ -14,6 +14,13 @@ class Stocks extends React.Component {
 
   componentDidMount() {
     const favorites = localStorage.getItem('stock-explorer_favorites')
+    if (!favorites) {
+      this.setState({
+        stocks: [],
+        market: 'favorites',
+      })
+      return
+    }
     const { market } = this.state
 
     fetch(`https://api.iextrading.com/1.0/stock/market/list/${market}`)
@@ -81,7 +88,7 @@ class Stocks extends React.Component {
     const { stocks, favorites, market } = this.state
 
     let stockElements = <Spinner />
-    if (stocks.length > 1) {
+    if (stocks.length > 0) {
       stockElements = stocks.map((val) => (
         <Panel
           title={val.companyName}
