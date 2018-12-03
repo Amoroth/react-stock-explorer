@@ -104,15 +104,6 @@ class StockPage extends Component {
   render() {
     const { chart, logo, book, chartTime, relevant } = this.state
 
-    let chartEl = (
-      <div className={styles['spinner-container']}>
-        <Spinner />
-      </div>
-    )
-    if (chart.length > 0) {
-      chartEl = <StockChart data={chart} />
-    }
-
     const charttimeButtonElements = ['1m', '3m', '6m', '1y', '2y'].map(
       (val, ind) => (
         <button
@@ -164,6 +155,23 @@ class StockPage extends Component {
       })
     }
 
+    let chartEl = (
+      <div className={styles['spinner-container']}>
+        <Spinner />
+      </div>
+    )
+    if (chart.length > 0) {
+      chartEl = (
+        <div>
+          <div className={styles['charttime-container']}>
+            {charttimeButtonElements}
+          </div>
+          <StockChart data={chart} />
+          <div className={styles['book-info']}>{bookInfoElements}</div>
+        </div>
+      )
+    }
+
     return (
       <div className={styles.container}>
         <PageTitle
@@ -174,13 +182,7 @@ class StockPage extends Component {
           link
         />
         <hr />
-        <div>
-          <div className={styles['charttime-container']}>
-            {charttimeButtonElements}
-          </div>
-          {chartEl}
-          <div className={styles['book-info']}>{bookInfoElements}</div>
-        </div>
+        {chartEl}
         <hr />
         <div>
           {book.sector ? <p>{`Sector: ${book.sector}`}</p> : <p>Relevant:</p>}

@@ -27,6 +27,7 @@
   transition: box-shadow .1s ease-in-out;
   width: 49%;
   cursor: pointer;
+  user-select: none;
 }
 
 .panel:hover {
