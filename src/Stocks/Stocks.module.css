@@ -66,6 +66,12 @@
   text-align: center;
 }
 
+@media screen and (max-width: 800px) {
+  .panel {
+    width: 97%;
+  }
+}
+
 @media screen and (max-width: 620px) {
   .container {
     width: 100%;
@@ -75,9 +81,5 @@
   
   .stocks-container {
     justify-content: center;
-  }
-
-  .panel {
-    width: 97%;
   }
 }
