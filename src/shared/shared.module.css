@@ -158,7 +158,8 @@
 
 @media screen and (max-width: 800px) {
   .back-button {
-    visibility: hidden;
+    position: absolute;
+    right: 10000px;
   }
 }
 @media screen and (max-width: 620px) {

@@ -49,19 +49,21 @@ const pageTitle = (props) => {
         <div>
           <div style={{ display: 'flex' }}>
             {titleEl}
-            <button
-              onClick={(e) => onFav(e, symbol)}
-              type="button"
-              className={styles['favorite-button']}
-            >
-              {favorite ? (
-                <i className="material-icons" style={{ color: 'red' }}>
-                  favorite
-                </i>
-              ) : (
-                <i className="material-icons">favorite_border</i>
-              )}
-            </button>
+            {name ? (
+              <button
+                onClick={(e) => onFav(e, symbol)}
+                type="button"
+                className={styles['favorite-button']}
+              >
+                {favorite ? (
+                  <i className="material-icons" style={{ color: 'red' }}>
+                    favorite
+                  </i>
+                ) : (
+                  <i className="material-icons">favorite_border</i>
+                )}
+              </button>
+            ) : null}
           </div>
           <span>{symbol ? `${exchange}: ${symbol}` : null}</span>
         </div>
