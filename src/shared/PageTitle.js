@@ -10,7 +10,7 @@ const pageTitle = (props) => {
 
   const onBackClick = () => {
     if (link) {
-      history.push('/')
+      history.push('/market')
     } else {
       history.goBack()
     }

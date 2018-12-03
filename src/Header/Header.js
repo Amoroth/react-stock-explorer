@@ -43,7 +43,7 @@ const header = ({ location, history }) => {
       <div className={[styles['nav-links']].join(' ')}>
         <SearchBar />
         <NavLink
-          to="/"
+          to="/market"
           exact
           activeClassName={styles['nav-link-active']}
           className={navlinkStyle}

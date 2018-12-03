@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import Header from './Header/Header'
 import Stocks from './Stocks/Stocks'
@@ -32,7 +32,8 @@ class App extends Component {
 
     const router = (
       <Switch>
-        <Route path="/" exact render={(props) => <Stocks {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
+        <Route path="/" exact render={() => <Redirect to="/market" />} />
+        <Route path="/market" exact render={(props) => <Stocks {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
         <Route path="/stock" exact render={(props) => <StockPage {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
         <Route path="/company" exact render={(props) => <CompanyPage {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
         <Route render={() => <h1>404</h1>} />
