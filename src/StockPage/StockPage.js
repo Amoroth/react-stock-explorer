@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Draggable from 'react-draggable'
 import { Link } from 'react-router-dom'
+import Draggable from 'react-draggable'
 
 import { numberFormater } from '../shared/utils'
 import PageTitle from '../shared/PageTitle'
@@ -15,18 +15,6 @@ class StockPage extends Component {
       symbol: '',
       companyName: '',
       primaryExchange: '',
-      sector: '',
-      open: 0,
-      openTime: 0,
-      close: 0,
-      closeTime: 0,
-      high: 0,
-      low: 0,
-      previousClose: 0,
-      week52High: 0,
-      week52Low: 0,
-      marketCap: 0,
-      peRatio: 0,
     },
     chart: [],
     chartTime: 0,
@@ -38,17 +26,24 @@ class StockPage extends Component {
     const { location } = this.props
     const cmp = new URLSearchParams(location.search.slice(1)).get('cmp')
     this.updateBook(cmp)
-    this.updateChart(cmp, '1m')
+    this.updateChart(cmp)
   }
 
-  componentDidUpdate() {
-    const { location } = this.props
-    const { book } = this.state
-    const cmp = new URLSearchParams(location.search.slice(1)).get('cmp')
-    if (cmp.toLowerCase() !== book.symbol.toLowerCase()) {
-      this.updateBook(cmp)
-      this.updateChart(cmp, '1m')
-    }
+  onRelevantSelect = (symbol) => {
+    this.setState({
+      chart: [],
+      book: {
+        symbol: '',
+        companyName: '',
+        primaryExchange: '',
+      },
+      relevant: [],
+      logo: '',
+    })
+    window.scrollTo(0, 0)
+
+    this.updateChart(symbol)
+    this.updateBook(symbol)
   }
 
   updateBook = (cmp) => {
@@ -81,7 +76,7 @@ class StockPage extends Component {
       })
   }
 
-  updateChart = (symbol, time) => {
+  updateChart = (symbol, time = '1m') => {
     fetch(
       `https://api.iextrading.com/1.0/stock/${symbol}/chart/${time}?filter=date,close,label`,
     )
@@ -149,7 +144,7 @@ class StockPage extends Component {
             <span>
               {`${labelName}:`}
             </span>
-            <span>{`${numberFormater(newBook[key])} USD`}</span>
+            <span>{`${numberFormater(newBook[key] || 0)} USD`}</span>
           </React.Fragment>
         )
       })
@@ -234,7 +229,7 @@ class StockPage extends Component {
                         <Link
                           to={`/stock?cmp=${val.symbol}`}
                           onDragStart={(e) => e.preventDefault()}
-                          onClick={() => window.scrollTo(0, 0)}
+                          onClick={() => this.onRelevantSelect(val.symbol)}
                         >
                           More...
                         </Link>
