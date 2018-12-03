@@ -14,19 +14,12 @@ class Stocks extends React.Component {
 
   componentDidMount() {
     const favorites = localStorage.getItem('stock-explorer_favorites')
-    if (!favorites) {
-      this.setState({
-        stocks: [],
-        market: 'favorites',
-      })
-      return
-    }
     const { market } = this.state
 
     fetch(`https://api.iextrading.com/1.0/stock/market/list/${market}`)
       .then((res) => res.json())
       .then((json) => {
-        this.setState({ stocks: json, favorites: favorites.split(',') })
+        this.setState({ stocks: json, favorites: favorites ? favorites.split(',') : [] })
       })
   }
 
