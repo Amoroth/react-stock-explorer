@@ -98,6 +98,7 @@ class StockPage extends Component {
 
   render() {
     const { chart, logo, book, chartTime, relevant } = this.state
+    const { favorites, onFavorite } = this.props
 
     const charttimeButtonElements = ['1m', '3m', '6m', '1y', '2y'].map(
       (val, ind) => (
@@ -181,6 +182,8 @@ class StockPage extends Component {
           name={book.companyName}
           exchange={book.primaryExchange}
           symbol={book.symbol}
+          favorite={favorites.includes(book.symbol)}
+          onFav={onFavorite}
           link
         />
         <hr />
@@ -253,6 +256,10 @@ class StockPage extends Component {
   }
 }
 
-StockPage.propTypes = { location: PropTypes.objectOf(PropTypes.string).isRequired }
+StockPage.propTypes = {
+  location: PropTypes.objectOf(PropTypes.string).isRequired,
+  favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onFavorite: PropTypes.func.isRequired,
+}
 
 export default StockPage

@@ -32,9 +32,9 @@ class App extends Component {
 
     const router = (
       <Switch>
-        <Route path="/" exact render={() => <Stocks favorites={favorites} onFavorite={this.onFavorite} />} />
-        <Route path="/stock" exact component={StockPage} />
-        <Route path="/company" exact component={CompanyPage} />
+        <Route path="/" exact render={(props) => <Stocks {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
+        <Route path="/stock" exact render={(props) => <StockPage {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
+        <Route path="/company" exact render={(props) => <CompanyPage {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
         <Route render={() => <h1>404</h1>} />
       </Switch>
     )

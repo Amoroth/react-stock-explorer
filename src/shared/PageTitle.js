@@ -6,7 +6,7 @@ import SmallSpinner from './SmallSpinner'
 import styles from './shared.module.css'
 
 const pageTitle = (props) => {
-  const { logo, name, link, history, exchange, symbol } = props
+  const { logo, name, link, history, exchange, symbol, favorite, onFav } = props
 
   const onBackClick = () => {
     if (link) {
@@ -20,8 +20,8 @@ const pageTitle = (props) => {
   if (link) {
     titleEl = (
       <Link to={`/company?cmp=${props.symbol}`} style={{ cursor: 'pointer' }}>
-        {props.name}
-        {props.name ? (
+        {name}
+        {name ? (
           <i
             className="material-icons"
             style={{ color: 'gray', marginLeft: 10 }}
@@ -47,11 +47,26 @@ const pageTitle = (props) => {
           <SmallSpinner />
         )}
         <div>
-          {titleEl}
+          <div style={{ display: 'flex' }}>
+            {titleEl}
+            <button
+              onClick={(e) => onFav(e, symbol)}
+              type="button"
+              className={styles['favorite-button']}
+            >
+              {favorite ? (
+                <i className="material-icons" style={{ color: 'red' }}>
+                  favorite
+                </i>
+              ) : (
+                <i className="material-icons">favorite_border</i>
+              )}
+            </button>
+          </div>
           <span>{symbol ? `${exchange}: ${symbol}` : null}</span>
         </div>
       </div>
-      <button onClick={onBackClick} type="button">
+      <button onClick={onBackClick} type="button" className={styles['back-button']}>
         <i className="material-icons md-48">arrow_back</i>
       </button>
     </div>
@@ -71,6 +86,8 @@ pageTitle.propTypes = {
     push: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired,
   }).isRequired,
+  favorite: PropTypes.bool.isRequired,
+  onFav: PropTypes.func.isRequired,
 }
 
 pageTitle.defaultProps = { link: false }

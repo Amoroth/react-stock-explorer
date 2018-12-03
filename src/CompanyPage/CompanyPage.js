@@ -55,6 +55,7 @@ class CompanyPage extends Component {
 
   render() {
     const { financials, finTime, logo, company } = this.state
+    const { favorites, onFavorite } = this.props
 
     let currentReport = {}
     if (financials) {
@@ -106,6 +107,8 @@ class CompanyPage extends Component {
           name={company.companyName}
           exchange={company.exchange}
           symbol={company.symbol}
+          favorite={favorites.includes(company.symbol)}
+          onFav={onFavorite}
         />
         <hr />
         <div>
@@ -128,6 +131,10 @@ class CompanyPage extends Component {
   }
 }
 
-CompanyPage.propTypes = { location: PropTypes.objectOf(PropTypes.string).isRequired }
+CompanyPage.propTypes = {
+  location: PropTypes.objectOf(PropTypes.string).isRequired,
+  favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onFavorite: PropTypes.func.isRequired,
+}
 
 export default CompanyPage

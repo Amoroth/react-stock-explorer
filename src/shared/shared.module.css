@@ -129,7 +129,7 @@
   margin: 10px;
 }
 
-.title-bar button {
+.back-button {
   background: none;
   border: none;
   margin: 0;
@@ -137,8 +137,14 @@
   height: 60px;
 }
 
-.title-bar button:hover {
+.back-button:hover {
   color: gray;
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  margin: 0;
 }
 
 .circular-button {
@@ -151,7 +157,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .title-bar button {
+  .back-button {
     visibility: hidden;
   }
 }
@@ -163,7 +169,6 @@
   }
 
   .circular-button {
-    padding: 8px 8px;
     font-size: .8em;
   }
 }
