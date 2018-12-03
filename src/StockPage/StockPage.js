@@ -117,8 +117,10 @@ class StockPage extends Component {
     let bookInfoElements = null
     if (Object.keys(book).length > 1) {
       const newBook = (({
-        open,
-        previousClose,
+        close,
+        latestPrice,
+        changePercent,
+        change,
         high,
         week52High,
         low,
@@ -126,8 +128,10 @@ class StockPage extends Component {
         marketCap,
         peRatio,
       }) => ({
-        open,
-        previousClose,
+        close,
+        latestPrice,
+        changePercent,
+        change,
         high,
         week52High,
         low,
@@ -139,12 +143,15 @@ class StockPage extends Component {
       bookInfoElements = Object.keys(newBook).map((key) => {
         const tempName = key.replace(/([A-Z])/g, ' $1')
         const labelName = tempName.charAt(0).toUpperCase() + tempName.slice(1)
+        const formatedNumber = key === 'changePercent'
+          ? `${newBook[key] > 0 ? '+' : ''}${(newBook[key] * 100).toFixed(2)}%`
+          : `${numberFormater(newBook[key] || 0)} USD`
         return (
           <React.Fragment key={key}>
             <span>
               {`${labelName}:`}
             </span>
-            <span>{`${numberFormater(newBook[key] || 0)} USD`}</span>
+            <span>{formatedNumber}</span>
           </React.Fragment>
         )
       })
