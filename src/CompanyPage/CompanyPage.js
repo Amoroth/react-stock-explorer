@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { numberFormater } from '../shared/utils'
+import numberFormater from '../shared/utils'
 import PageTitle from '../shared/PageTitle'
 import styles from './CompanyPage.module.css'
 
@@ -55,7 +55,7 @@ class CompanyPage extends Component {
 
   render() {
     const { financials, finTime, logo, company } = this.state
-    const { favorites, onFavorite } = this.props
+    const { favorites, onFavorite, currency } = this.props
 
     let currentReport = {}
     if (financials) {
@@ -90,7 +90,7 @@ class CompanyPage extends Component {
                 return (
                   <React.Fragment key={val}>
                     <span>{labelName}</span>
-                    <span>{currentReport[val] ? `${numberFormater(currentReport[val])} USD` : '-'}</span>
+                    <span>{currentReport[val] ? `${numberFormater(currentReport[val], false, currency)} ${currency}` : '-'}</span>
                   </React.Fragment>
                 )
               })}
@@ -135,6 +135,7 @@ CompanyPage.propTypes = {
   location: PropTypes.objectOf(PropTypes.string).isRequired,
   favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
   onFavorite: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired,
 }
 
 export default CompanyPage

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Draggable from 'react-draggable'
 
-import { numberFormater } from '../shared/utils'
+import numberFormater from '../shared/utils'
 import PageTitle from '../shared/PageTitle'
 import StockChart from './StockChart'
 import Spinner from '../shared/Spinner'
@@ -98,7 +98,7 @@ class StockPage extends Component {
 
   render() {
     const { chart, logo, book, chartTime, relevant } = this.state
-    const { favorites, onFavorite } = this.props
+    const { favorites, onFavorite, currency } = this.props
 
     const charttimeButtonElements = ['1m', '3m', '6m', '1y', '2y'].map(
       (val, ind) => (
@@ -146,7 +146,7 @@ class StockPage extends Component {
         const labelName = tempName.charAt(0).toUpperCase() + tempName.slice(1)
         const formatedNumber = key === 'changePercent'
           ? `${newBook[key] > 0 ? '+' : ''}${(newBook[key] * 100).toFixed(2)}%`
-          : `${numberFormater(newBook[key] || 0)} USD`
+          : `${numberFormater(newBook[key] || 0, false, currency)} ${currency}`
         return (
           <React.Fragment key={key}>
             <span>
@@ -260,6 +260,7 @@ StockPage.propTypes = {
   location: PropTypes.objectOf(PropTypes.string).isRequired,
   favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
   onFavorite: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired,
 }
 
 export default StockPage
