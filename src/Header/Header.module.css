@@ -124,6 +124,20 @@
   font-weight: normal;
 }
 
+.dropdown {
+  display: inline-block;
+}
+
+.dropdown-control {
+  background-color: transparent;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border: none;
+  width: 70px;
+}
+
 @media screen and (max-width: 800px) {
   .brand-container {
     margin: 0;
@@ -140,7 +154,7 @@
   }
 
   .nav-links {
-    margin: 0 15px 0 0;
+    margin: 0 60px 0 0;
   }
 
   .desktop-only {

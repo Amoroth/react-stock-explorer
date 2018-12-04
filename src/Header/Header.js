@@ -1,16 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, NavLink } from 'react-router-dom'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
 import SearchBar from './SearchBar'
 import styles from './Header.module.css'
 
-const header = ({ location, history }) => {
-  let expandButton = (
-    <button className={styles['expand-button']} type="button">
-      <i className="material-icons">menu</i>
-    </button>
-  )
+const header = ({ location, history, currencyChange, currency }) => {
+  let expandButton = null
 
   const onBackClick = () => {
     if (location.pathname === '/company') {
@@ -32,31 +30,38 @@ const header = ({ location, history }) => {
     )
   }
 
-  const navlinkStyle = [styles['nav-link'], styles['desktop-only']].join(' ')
+  const dropdownOptions = ['EUR', 'USD', 'PLN']
 
   return (
     <nav className={styles.container}>
       <div className={styles['brand-container']}>
         {expandButton}
-        <h6 className={styles.brand}>Stock Explorer!</h6>
+        {window.innerWidth > 800 ? <h6 className={styles.brand}>Stock Explorer!</h6> : null}
       </div>
-      <div className={[styles['nav-links']].join(' ')}>
+      <div className={styles['nav-links']}>
         <SearchBar />
         <NavLink
           to="/market"
           exact
           activeClassName={styles['nav-link-active']}
-          className={navlinkStyle}
+          className={styles['nav-link']}
         >
           Stocks
         </NavLink>
         <NavLink
           to="/error"
           activeClassName={styles['nav-link-active']}
-          className={navlinkStyle}
+          className={styles['nav-link']}
         >
           Cryptos
         </NavLink>
+        <Dropdown
+          options={dropdownOptions}
+          onChange={(cur) => currencyChange(cur.value)}
+          value={currency}
+          className={styles.dropdown}
+          controlClassName={styles['dropdown-control']}
+        />
       </div>
     </nav>
   )
@@ -68,6 +73,8 @@ header.propTypes = {
     goBack: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
   }).isRequired,
+  currencyChange: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired,
 }
 
 export default withRouter(header)

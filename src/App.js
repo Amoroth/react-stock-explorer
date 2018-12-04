@@ -7,7 +7,7 @@ import StockPage from './StockPage/StockPage'
 import CompanyPage from './CompanyPage/CompanyPage'
 
 class App extends Component {
-  state = { favorites: [] }
+  state = { favorites: [], currency: 'USD' }
 
   componentDidMount() {
     const favorites = localStorage.getItem('stock-explorer_favorites')
@@ -27,22 +27,59 @@ class App extends Component {
     }
   }
 
+  onCurrencyChange = (newCurrency) => {
+    this.setState({ currency: newCurrency })
+  }
+
   render() {
-    const { favorites } = this.state
+    const { favorites, currency } = this.state
 
     const router = (
       <Switch>
         <Route path="/" exact render={() => <Redirect to="/market" />} />
-        <Route path="/market" exact render={(props) => <Stocks {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
-        <Route path="/stock" exact render={(props) => <StockPage {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
-        <Route path="/company" exact render={(props) => <CompanyPage {...props} favorites={favorites} onFavorite={this.onFavorite} />} />
+        <Route
+          path="/market"
+          exact
+          render={(props) => (
+            <Stocks
+              {...props}
+              favorites={favorites}
+              onFavorite={this.onFavorite}
+              currency={currency}
+            />
+          )}
+        />
+        <Route
+          path="/stock"
+          exact
+          render={(props) => (
+            <StockPage
+              {...props}
+              favorites={favorites}
+              onFavorite={this.onFavorite}
+              currency={currency}
+            />
+          )}
+        />
+        <Route
+          path="/company"
+          exact
+          render={(props) => (
+            <CompanyPage
+              {...props}
+              favorites={favorites}
+              onFavorite={this.onFavorite}
+              currency={currency}
+            />
+          )}
+        />
         <Route render={() => <h1>404</h1>} />
       </Switch>
     )
 
     return (
       <div className="App">
-        <Header />
+        <Header currencyChange={this.onCurrencyChange} currency={currency} />
         {router}
       </div>
     )
