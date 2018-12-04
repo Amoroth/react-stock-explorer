@@ -16,11 +16,11 @@ const header = ({ location, history }) => {
     if (location.pathname === '/company') {
       history.goBack()
     } else {
-      history.push('/')
+      history.push('/market')
     }
   }
 
-  if (location.pathname !== '/') {
+  if (location.pathname !== '/market') {
     expandButton = (
       <button
         className={styles['expand-button']}
