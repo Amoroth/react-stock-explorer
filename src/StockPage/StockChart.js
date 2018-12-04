@@ -4,7 +4,8 @@ import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme } from 'victory'
 
 const stockChart = ({ data }) => {
   const graphSizeX = window.innerWidth < 620 ? 350 : 500
-  const graphSizeY = window.innerWidth < 620 ? 400 : 250
+  // const graphSizeY = window.innerWidth < 620 ? 250 : 250
+  const graphSizeY = 250
 
   return (
     <svg
