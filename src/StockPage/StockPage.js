@@ -195,7 +195,7 @@ class StockPage extends Component {
             <Draggable
               axis="x"
               defaultPosition={{ x: 0, y: 0 }}
-              bounds={{ left: -1010, right: 0 }}
+              bounds={{ left: (relevant.length - 3.48) * -220, right: 0 }}
             >
               <div className={styles['relevant-inner']}>
                 {relevant.map((val) => {
