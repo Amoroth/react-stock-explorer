@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withRouter, NavLink } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
@@ -8,7 +8,7 @@ import SearchBar from './SearchBar'
 import styles from './Header.module.css'
 
 const header = ({ location, history, currencyChange, currency }) => {
-  let expandButton = null
+  let backButton = <h6 className={styles.brand}>SE!</h6>
 
   const onBackClick = () => {
     if (location.pathname === '/company') {
@@ -19,7 +19,7 @@ const header = ({ location, history, currencyChange, currency }) => {
   }
 
   if (location.pathname !== '/market') {
-    expandButton = (
+    backButton = (
       <button
         className={styles['expand-button']}
         onClick={onBackClick}
@@ -35,12 +35,11 @@ const header = ({ location, history, currencyChange, currency }) => {
   return (
     <nav className={styles.container}>
       <div className={styles['brand-container']}>
-        {expandButton}
-        {window.innerWidth > 800 ? <h6 className={styles.brand}>Stock Explorer!</h6> : null}
+        {window.innerWidth > 800 ? <Link to="/market" className={styles.brand}>Stock Explorer!</Link> : backButton}
       </div>
       <div className={styles['nav-links']}>
         <SearchBar />
-        <NavLink
+        {/* <NavLink
           to="/market"
           exact
           activeClassName={styles['nav-link-active']}
@@ -54,7 +53,7 @@ const header = ({ location, history, currencyChange, currency }) => {
           className={styles['nav-link']}
         >
           Cryptos
-        </NavLink>
+        </NavLink> */}
         <Dropdown
           options={dropdownOptions}
           onChange={(cur) => currencyChange(cur.value)}
