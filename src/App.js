@@ -12,7 +12,8 @@ class App extends Component {
 
   componentDidMount() {
     const favorites = localStorage.getItem('stock-explorer_favorites')
-    this.setState({ favorites: favorites ? favorites.split(',') : [] })
+    const currency = localStorage.getItem('stock-explorer_currency')
+    this.setState({ favorites: favorites ? favorites.split(',') : [], currency: currency || 'USD' })
   }
 
   onFavorite = (event, symbol) => {
@@ -55,7 +56,7 @@ class App extends Component {
   }
 
   onCurrencyChange = (newCurrency) => {
-    this.setState({ currency: newCurrency })
+    this.setState({ currency: newCurrency }, () => localStorage.setItem('stock-explorer_currency', newCurrency))
   }
 
   render() {

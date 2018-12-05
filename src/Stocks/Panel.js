@@ -48,7 +48,7 @@ const panel = ({ change, title, short, favorite, onFav, price, history, currency
       </div>
       <div className={styles['panel-details']}>
         <span>{short}</span>
-        <span>{`${price} ${currency}`}</span>
+        <span>{`${price === 'NaN' ? 0 : price} ${currency}`}</span>
         <span style={{ color: change > 0 ? 'green' : 'red' }}>
           {priceChange}
         </span>
