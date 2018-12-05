@@ -34,7 +34,7 @@ class App extends Component {
     if (Object.keys(currencyRates).length > 1) {
       return
     }
-    fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=GBP,PLN,EUR')
+    fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR,PLN,GBP,CHF')
       .then((res) => res.json())
       .then((json) => {
         const exchangeRates = Object.assign({}, json.rates)

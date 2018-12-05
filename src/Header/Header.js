@@ -30,7 +30,7 @@ const header = ({ location, history, currencyChange, currency }) => {
     )
   }
 
-  const dropdownOptions = ['EUR', 'USD', 'PLN']
+  const dropdownOptions = ['USD', 'EUR', 'PLN', 'GBP', 'CHF']
 
   return (
     <nav className={styles.container}>
