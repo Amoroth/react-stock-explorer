@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import styles from './Stocks.module.css'
 
-const panel = ({ change, title, short, favorite, onFav, price, history }) => {
+const panel = ({ change, title, short, favorite, onFav, price, history, currency }) => {
   const priceChange = `${change > 0 ? '+' : ''}${(change * 100).toFixed(2)}%`
   let stockName = title
   if (stockName.length > 30) {
@@ -48,7 +48,7 @@ const panel = ({ change, title, short, favorite, onFav, price, history }) => {
       </div>
       <div className={styles['panel-details']}>
         <span>{short}</span>
-        <span>{`${price} USD`}</span>
+        <span>{`${price} ${currency}`}</span>
         <span style={{ color: change > 0 ? 'green' : 'red' }}>
           {priceChange}
         </span>
@@ -64,7 +64,8 @@ panel.propTypes = {
   favorite: PropTypes.bool,
   onFav: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
 }
 
 panel.defaultProps = { favorite: false }

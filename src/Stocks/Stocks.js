@@ -64,7 +64,7 @@ class Stocks extends React.Component {
 
   render() {
     const { stocks, market } = this.state
-    const { favorites, onFavorite } = this.props
+    const { favorites, onFavorite, currency, currencyFormat } = this.props
 
     let stockElements = <Spinner />
     if (stocks.length > 0) {
@@ -72,7 +72,8 @@ class Stocks extends React.Component {
         <Panel
           title={val.companyName}
           short={val.symbol}
-          price={val.close}
+          price={currencyFormat(val.close)}
+          currency={currency}
           change={val.changePercent}
           favorite={favorites.includes(val.symbol)}
           key={val.symbol}
@@ -112,6 +113,8 @@ class Stocks extends React.Component {
 Stocks.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
   onFavorite: PropTypes.func.isRequired,
+  currency: PropTypes.string.isRequired,
+  currencyFormat: PropTypes.func.isRequired,
 }
 
 export default Stocks

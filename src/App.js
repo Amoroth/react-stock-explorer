@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
+import numberFormater from './shared/utils'
 import Header from './Header/Header'
 import Stocks from './Stocks/Stocks'
 import StockPage from './StockPage/StockPage'
 import CompanyPage from './CompanyPage/CompanyPage'
 
 class App extends Component {
-  state = { favorites: [], currency: 'USD' }
+  state = { favorites: [], currency: 'USD', currencyRates: {} }
 
   componentDidMount() {
     const favorites = localStorage.getItem('stock-explorer_favorites')
@@ -25,6 +26,32 @@ class App extends Component {
       const newFavorites = favorites.filter((val) => val !== symbol)
       this.setState({ favorites: newFavorites }, () => localStorage.setItem('stock-explorer_favorites', newFavorites))
     }
+  }
+
+  getExchangeRates = () => {
+    const { currencyRates } = this.state
+    if (Object.keys(currencyRates).length > 1) {
+      return
+    }
+    fetch('https://api.exchangeratesapi.io/latest?base=USD&symbols=GBP,PLN,EUR')
+      .then((res) => res.json())
+      .then((json) => {
+        const exchangeRates = Object.assign({}, json.rates)
+        exchangeRates.USD = 1
+
+        this.setState({ currencyRates: exchangeRates })
+      })
+  }
+
+  currencyFormat = (number) => {
+    const { currency, currencyRates } = this.state
+    this.getExchangeRates()
+
+    let newNumber = number
+    if (currency !== 'USD') {
+      newNumber = number * currencyRates[currency]
+    }
+    return numberFormater(newNumber)
   }
 
   onCurrencyChange = (newCurrency) => {
@@ -46,6 +73,7 @@ class App extends Component {
               favorites={favorites}
               onFavorite={this.onFavorite}
               currency={currency}
+              currencyFormat={this.currencyFormat}
             />
           )}
         />
@@ -58,6 +86,7 @@ class App extends Component {
               favorites={favorites}
               onFavorite={this.onFavorite}
               currency={currency}
+              currencyFormat={this.currencyFormat}
             />
           )}
         />
@@ -70,6 +99,7 @@ class App extends Component {
               favorites={favorites}
               onFavorite={this.onFavorite}
               currency={currency}
+              currencyFormat={this.currencyFormat}
             />
           )}
         />

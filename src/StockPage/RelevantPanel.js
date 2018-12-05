@@ -59,7 +59,7 @@ relevantPanel.propTypes = {
   name: PropTypes.string.isRequired,
   change: PropTypes.number.isRequired,
   symbol: PropTypes.string.isRequired,
-  close: PropTypes.number.isRequired,
+  close: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
 }
 
