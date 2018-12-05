@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Draggable from 'react-draggable'
 
 import numberFormater from '../shared/utils'
 import PageTitle from '../shared/PageTitle'
 import StockChart from './StockChart'
 import Spinner from '../shared/Spinner'
+import RelevantPanel from './RelevantPanel'
 import styles from './StockPage.module.css'
 
 class StockPage extends Component {
@@ -198,55 +198,16 @@ class StockPage extends Component {
               bounds={{ left: (relevant.length - 3.48) * -220, right: 0 }}
             >
               <div className={styles['relevant-inner']}>
-                {relevant.map((val) => {
-                  let shortCompanyName = val.companyName
-                  const priceChange = `${val.changePercent > 0 ? '+' : ''}${(
-                    val.changePercent * 100
-                  ).toFixed(2)}%`
-
-                  if (shortCompanyName.length > 14) {
-                    shortCompanyName = `${shortCompanyName.slice(0, 12)}...`
-                  }
-                  return (
-                    <div className={styles['relavent-item']} key={val.symbol}>
-                      <div
-                        className={`${styles['relavent-item-row']} ${
-                          styles['relavent-item-title']
-                        }`}
-                      >
-                        <h6
-                          title={
-                            shortCompanyName[shortCompanyName.length - 2] === '.'
-                              ? val.companyName
-                              : null
-                          }
-                        >
-                          {shortCompanyName}
-                        </h6>
-                        <span>{val.symbol}</span>
-                      </div>
-                      <div
-                        className={`${styles['relavent-item-row']} ${
-                          styles['relavent-item-info']
-                        }`}
-                      >
-                        <span>{val.close}</span>
-                        <span
-                          style={{ color: val.changePercent > 0 ? 'green' : 'red' }}
-                        >
-                          {priceChange}
-                        </span>
-                        <Link
-                          to={`/stock?cmp=${val.symbol}`}
-                          onDragStart={(e) => e.preventDefault()}
-                          onClick={() => this.onRelevantSelect(val.symbol)}
-                        >
-                          More...
-                        </Link>
-                      </div>
-                    </div>
-                  )
-                })}
+                {relevant.map((val) => (
+                  <RelevantPanel
+                    name={val.companyName}
+                    symbol={val.symbol}
+                    close={val.close}
+                    change={val.changePercent}
+                    onSelect={this.onRelevantSelect}
+                    key={`rel-${val.symbol}`}
+                  />
+                ))}
               </div>
             </Draggable>
           </div>
