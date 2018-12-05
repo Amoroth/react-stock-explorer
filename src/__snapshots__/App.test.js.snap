@@ -1,0 +1,392 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<app /> renders without crashing 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "key": "testkey",
+        "pathname": "/market",
+      },
+    ]
+  }
+>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "canGo": [Function],
+        "createHref": [Function],
+        "entries": Array [
+          Object {
+            "hash": "",
+            "key": "testkey",
+            "pathname": "/market",
+            "search": "",
+          },
+        ],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "index": 0,
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "key": "testkey",
+          "pathname": "/market",
+          "search": "",
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <App>
+      <div
+        className="App"
+      >
+        <withRouter(header)
+          currency="USD"
+          currencyChange={[Function]}
+        >
+          <Route>
+            <header
+              currency="USD"
+              currencyChange={[Function]}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "canGo": [Function],
+                  "createHref": [Function],
+                  "entries": Array [
+                    Object {
+                      "hash": "",
+                      "key": "testkey",
+                      "pathname": "/market",
+                      "search": "",
+                    },
+                  ],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "index": 0,
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "key": "testkey",
+                    "pathname": "/market",
+                    "search": "",
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "key": "testkey",
+                  "pathname": "/market",
+                  "search": "",
+                }
+              }
+              match={
+                Object {
+                  "isExact": false,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+            >
+              <nav
+                className="container"
+              >
+                <div
+                  className="brand-container"
+                >
+                  <Link
+                    className="brand"
+                    replace={false}
+                    to="/market"
+                  >
+                    <a
+                      className="brand"
+                      href="/market"
+                      onClick={[Function]}
+                    >
+                      Stock Explorer!
+                    </a>
+                  </Link>
+                </div>
+                <div
+                  className="nav-links"
+                >
+                  <withRouter(SearchBar)>
+                    <Route>
+                      <SearchBar
+                        history={
+                          Object {
+                            "action": "POP",
+                            "block": [Function],
+                            "canGo": [Function],
+                            "createHref": [Function],
+                            "entries": Array [
+                              Object {
+                                "hash": "",
+                                "key": "testkey",
+                                "pathname": "/market",
+                                "search": "",
+                              },
+                            ],
+                            "go": [Function],
+                            "goBack": [Function],
+                            "goForward": [Function],
+                            "index": 0,
+                            "length": 1,
+                            "listen": [Function],
+                            "location": Object {
+                              "hash": "",
+                              "key": "testkey",
+                              "pathname": "/market",
+                              "search": "",
+                            },
+                            "push": [Function],
+                            "replace": [Function],
+                          }
+                        }
+                        location={
+                          Object {
+                            "hash": "",
+                            "key": "testkey",
+                            "pathname": "/market",
+                            "search": "",
+                          }
+                        }
+                        match={
+                          Object {
+                            "isExact": false,
+                            "params": Object {},
+                            "path": "/",
+                            "url": "/",
+                          }
+                        }
+                      >
+                        <div
+                          style={
+                            Object {
+                              "display": "inline",
+                            }
+                          }
+                        >
+                          <input
+                            className="search-box"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            onKeyUp={[Function]}
+                            value=""
+                          />
+                          <div
+                            className="search-box-results"
+                          />
+                        </div>
+                      </SearchBar>
+                    </Route>
+                  </withRouter(SearchBar)>
+                  <Dropdown
+                    baseClassName="Dropdown"
+                    className="dropdown"
+                    controlClassName="dropdown-control"
+                    onChange={[Function]}
+                    options={
+                      Array [
+                        "USD",
+                        "EUR",
+                        "PLN",
+                        "GBP",
+                        "CHF",
+                      ]
+                    }
+                    value="USD"
+                  >
+                    <div
+                      className="Dropdown-root dropdown"
+                    >
+                      <div
+                        className="Dropdown-control dropdown-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className="Dropdown-placeholder is-selected"
+                        >
+                          USD
+                        </div>
+                        <div
+                          className="Dropdown-arrow-wrapper"
+                        >
+                          <span
+                            className="Dropdown-arrow"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </Dropdown>
+                </div>
+              </nav>
+            </header>
+          </Route>
+        </withRouter(header)>
+        <Switch>
+          <Route
+            computedMatch={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/market",
+                "url": "/market",
+              }
+            }
+            exact={true}
+            location={
+              Object {
+                "hash": "",
+                "key": "testkey",
+                "pathname": "/market",
+                "search": "",
+              }
+            }
+            path="/market"
+            render={[Function]}
+          >
+            <Stocks
+              currency="USD"
+              currencyFormat={[Function]}
+              favorites={Array []}
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "canGo": [Function],
+                  "createHref": [Function],
+                  "entries": Array [
+                    Object {
+                      "hash": "",
+                      "key": "testkey",
+                      "pathname": "/market",
+                      "search": "",
+                    },
+                  ],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "index": 0,
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "key": "testkey",
+                    "pathname": "/market",
+                    "search": "",
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "key": "testkey",
+                  "pathname": "/market",
+                  "search": "",
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/market",
+                  "url": "/market",
+                }
+              }
+              onFavorite={[Function]}
+            >
+              <div
+                className="container"
+              >
+                <div
+                  className="markets-container"
+                >
+                  <circularButton
+                    func={[Function]}
+                    key="infocus"
+                  >
+                    <button
+                      className="circular-button"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      In Focus
+                    </button>
+                  </circularButton>
+                  <circularButton
+                    func={[Function]}
+                    key="favorites"
+                  >
+                    <button
+                      className="circular-button"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      Favorites
+                    </button>
+                  </circularButton>
+                  <circularButton
+                    func={[Function]}
+                    key="gainers"
+                  >
+                    <button
+                      className="circular-button"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      Gainers
+                    </button>
+                  </circularButton>
+                  <circularButton
+                    func={[Function]}
+                    key="losers"
+                  >
+                    <button
+                      className="circular-button"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      Losers
+                    </button>
+                  </circularButton>
+                </div>
+                <div
+                  className="stocks-container"
+                >
+                  <spinner>
+                    <div
+                      className="loader"
+                    >
+                      Loading...
+                    </div>
+                  </spinner>
+                </div>
+              </div>
+            </Stocks>
+          </Route>
+        </Switch>
+      </div>
+    </App>
+  </Router>
+</MemoryRouter>
+`;
