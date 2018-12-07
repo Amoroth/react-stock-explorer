@@ -42,6 +42,7 @@ class App extends Component {
 
         this.setState({ currencyRates: exchangeRates })
       })
+      .catch(() => {})
   }
 
   currencyFormat = (number) => {

@@ -46,6 +46,7 @@ class CompanyPage extends Component {
           financials: json.financials.financials,
         })
       })
+      .catch(() => {})
   }
 
   onSelectFintime = (index) => {

@@ -20,6 +20,7 @@ class Stocks extends React.Component {
       .then((json) => {
         this.setState({ stocks: json })
       })
+      .catch(() => {})
   }
 
   onMarketChange = (newMarket) => {
@@ -40,6 +41,7 @@ class Stocks extends React.Component {
           market: newMarket,
         })
       })
+      .catch(() => {})
   }
 
   loadFavorites = () => {
@@ -60,6 +62,7 @@ class Stocks extends React.Component {
           market: 'favorites',
         })
       })
+      .catch(() => {})
   }
 
   render() {

@@ -28,6 +28,7 @@ class SearchBar extends Component {
           searchBoxInput: window.innerWidth > 800,
         })
       })
+      .catch(() => {})
     this.setState({
       symbols: [
         { name: 'Alphabet Inc.', symbol: 'googl' },
@@ -37,6 +38,7 @@ class SearchBar extends Component {
       ],
       searchBoxInput: window.innerWidth > 800,
     })
+    window.addEventListener('resize', this.resize)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -45,6 +47,14 @@ class SearchBar extends Component {
       return true
     }
     return false
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize)
+  }
+
+  resize = () => {
+    this.setState({ searchBoxInput: window.innerWidth > 800 })
   }
 
   handleChange = (e) => {

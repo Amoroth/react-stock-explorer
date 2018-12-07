@@ -72,6 +72,7 @@ class StockPage extends Component {
               logo: json.logo.url,
             })
           })
+          .catch(() => {})
       })
   }
 
@@ -87,6 +88,7 @@ class StockPage extends Component {
           chartTime: timeNum,
         })
       })
+      .catch(() => {})
   }
 
   onSelectCharttime = (time) => {
