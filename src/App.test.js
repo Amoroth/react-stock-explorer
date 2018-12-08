@@ -13,11 +13,7 @@ rrd.BrowserRouter = ({ children }) => <div>{children}</div>
 
 describe('<app />', () => {
   it('renders without crashing', () => {
-    const wrapper = mount(
-      <rrd.MemoryRouter initialEntries={[{ pathname: '/market', key: 'testkey' }]}>
-        <App />
-      </rrd.MemoryRouter>
-    )
+    const wrapper = shallow(<App />)
     expect(wrapper).toMatchSnapshot()
   })
 
