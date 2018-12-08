@@ -29,15 +29,15 @@ class SearchBar extends Component {
         })
       })
       .catch(() => {})
-    this.setState({
-      symbols: [
-        { name: 'Alphabet Inc.', symbol: 'googl' },
-        { name: 'Microsoft Corporation', symbol: 'msft' },
-        { name: 'International Buissnes Machines Corporation', symbol: 'ibm' },
-        { name: 'Twitter Inc.', symbol: 'twtr' },
-      ],
-      searchBoxInput: window.innerWidth > 800,
-    })
+    // this.setState({
+    //   symbols: [
+    //     { name: 'Alphabet Inc.', symbol: 'googl' },
+    //     { name: 'Microsoft Corporation', symbol: 'msft' },
+    //     { name: 'International Buissnes Machines Corporation', symbol: 'ibm' },
+    //     { name: 'Twitter Inc.', symbol: 'twtr' },
+    //   ],
+    //   searchBoxInput: window.innerWidth > 800,
+    // })
     window.addEventListener('resize', this.resize)
   }
 

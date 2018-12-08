@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchBar /> renders 1`] = `
+<div
+  style={
+    Object {
+      "display": "inline",
+    }
+  }
+>
+  <button
+    className="search-box-icon"
+    onClick={[Function]}
+    type="button"
+  >
+    <i
+      className="material-icons"
+    >
+      search
+    </i>
+  </button>
+  <div
+    className="search-box-results"
+  />
+</div>
+`;
