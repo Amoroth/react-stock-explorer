@@ -19,7 +19,6 @@ describe('<Header />', () => {
     })
 
     it('renders correctly', () => {
-      wrapper = shallow(<Header currencyChange={jest.fn()} currency="USD" />)
       expect(wrapper).toMatchSnapshot()
     })
 
