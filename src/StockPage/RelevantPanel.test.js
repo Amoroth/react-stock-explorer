@@ -12,7 +12,7 @@ describe('<RelevantPanel />', () => {
       name: 'Company',
       change: 0.04,
       symbol: 'COM',
-      close: 4,
+      close: '4 USD',
       onSelect: jest.fn(),
     }
     wrapper = shallow(<RelevantPanel {...props} />)
@@ -24,6 +24,7 @@ describe('<RelevantPanel />', () => {
 
   it('sends to new company from link', () => {
     wrapper.find('Link').simulate('click')
+    
     expect(props.onSelect).toBeCalled()
   })
 
@@ -39,6 +40,7 @@ describe('<RelevantPanel />', () => {
 
   it('shortens title if too long', () => {
     wrapper.setProps({ name: 'Company with really long name' })
+
     expect(wrapper.find('h6').text()).toBe('Company with...')
   })
 

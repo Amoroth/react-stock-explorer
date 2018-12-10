@@ -21,7 +21,7 @@ exports[`<RelevantPanel /> renders 1`] = `
     className="relavent-item-row relavent-item-info"
   >
     <span>
-      4
+      4 USD
     </span>
     <span
       style={
