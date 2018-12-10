@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { createFilter } from 'react-search-input'
 import { Link, withRouter } from 'react-router-dom'
@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 import Overlay from '../shared/Overlay'
 import styles from './Header.module.css'
 
-class SearchBar extends Component {
+class SearchBar extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
