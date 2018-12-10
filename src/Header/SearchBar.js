@@ -13,7 +13,7 @@ class SearchBar extends PureComponent {
       input: '',
       symbols: [],
       searchResults: false,
-      searchBoxInput: false,
+      searchBoxInput: window.innerWidth > 800,
       inputCursor: null,
     }
     this.inputRef = React.createRef()
@@ -23,10 +23,7 @@ class SearchBar extends PureComponent {
     fetch('https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name')
       .then((res) => res.json())
       .then((json) => {
-        this.setState({
-          symbols: json,
-          searchBoxInput: window.innerWidth > 800,
-        })
+        this.setState({ symbols: json })
       })
       .catch(() => {})
     // this.setState({
