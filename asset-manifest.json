@@ -1,7 +1,7 @@
 {
   "main.css": "/react-stock-explorer/static/css/main.b6356e14.chunk.css",
-  "main.js": "/react-stock-explorer/static/js/main.8e5f3640.chunk.js",
-  "main.js.map": "/react-stock-explorer/static/js/main.8e5f3640.chunk.js.map",
+  "main.js": "/react-stock-explorer/static/js/main.690620ac.chunk.js",
+  "main.js.map": "/react-stock-explorer/static/js/main.690620ac.chunk.js.map",
   "static/css/1.b04499cf.chunk.css": "/react-stock-explorer/static/css/1.b04499cf.chunk.css",
   "static/js/1.2ab85867.chunk.js": "/react-stock-explorer/static/js/1.2ab85867.chunk.js",
   "static/js/1.2ab85867.chunk.js.map": "/react-stock-explorer/static/js/1.2ab85867.chunk.js.map",
@@ -24,6 +24,6 @@
   "static/css/3.3af3098d.chunk.css.map": "/react-stock-explorer/static/css/3.3af3098d.chunk.css.map",
   "static/css/5.61f58c3c.chunk.css.map": "/react-stock-explorer/static/css/5.61f58c3c.chunk.css.map",
   "index.html": "/react-stock-explorer/index.html",
-  "precache-manifest.b1425f89966be8b0ec877f741dec4b6c.js": "/react-stock-explorer/precache-manifest.b1425f89966be8b0ec877f741dec4b6c.js",
+  "precache-manifest.0ae5728a8157f4ad4462b942f9dbfccd.js": "/react-stock-explorer/precache-manifest.0ae5728a8157f4ad4462b942f9dbfccd.js",
   "service-worker.js": "/react-stock-explorer/service-worker.js"
 }
