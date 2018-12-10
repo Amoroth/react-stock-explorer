@@ -74,6 +74,7 @@ class StockPage extends Component {
           })
           .catch(() => {})
       })
+      .catch(() => {})
   }
 
   updateChart = (symbol, time = '1m') => {
