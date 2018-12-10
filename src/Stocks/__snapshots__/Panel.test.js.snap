@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Panel /> renders 1`] = `
+<div
+  className="panel"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  <div
+    className="panel-upper"
+  >
+    <h6
+      className="panel-title"
+      title={null}
+    >
+      Company
+    </h6>
+    <button
+      className="panel-favorite"
+      onClick={[Function]}
+      type="button"
+    >
+      <i
+        className="material-icons"
+      >
+        favorite_border
+      </i>
+    </button>
+  </div>
+  <div
+    className="panel-details"
+  >
+    <span>
+      COM
+    </span>
+    <span>
+      4 USD
+    </span>
+    <span
+      style={
+        Object {
+          "color": "green",
+        }
+      }
+    >
+      +4.00%
+    </span>
+  </div>
+</div>
+`;
