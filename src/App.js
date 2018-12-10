@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import numberFormater from './shared/utils'
 import Header from './Header/Header'
-import Stocks from './Stocks/Stocks'
-import StockPage from './StockPage/StockPage'
-import CompanyPage from './CompanyPage/CompanyPage'
+import Spinner from './shared/Spinner'
+
+const Stocks = lazy(() => import('./Stocks/Stocks'))
+const StockPage = lazy(() => import('./StockPage/StockPage'))
+const CompanyPage = lazy(() => import('./CompanyPage/CompanyPage'))
 
 class App extends Component {
   state = { favorites: [], currency: 'USD', currencyRates: {} }
@@ -14,6 +16,7 @@ class App extends Component {
     const favorites = localStorage.getItem('stock-explorer_favorites')
     const currency = localStorage.getItem('stock-explorer_currency')
     this.setState({ favorites: favorites ? favorites.split(',') : [], currency: currency || 'USD' })
+    this.getExchangeRates()
   }
 
   onFavorite = (event, symbol) => {
@@ -47,7 +50,6 @@ class App extends Component {
 
   currencyFormat = (number) => {
     const { currency, currencyRates } = this.state
-    this.getExchangeRates()
 
     let newNumber = number
     if (currency !== 'USD') {
@@ -112,7 +114,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header currencyChange={this.onCurrencyChange} currency={currency} />
-        {router}
+        <Suspense fallback={<div className="loading-page"><Spinner /></div>}>
+          {router}
+        </Suspense>
       </div>
     )
   }

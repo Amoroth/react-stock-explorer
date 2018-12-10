@@ -16,3 +16,10 @@ body {
 ::selection {
   background: #bbddf1; /* WebKit/Blink Browsers */
 }
+
+.loading-page {
+  height: 100%;
+  display: 'flex';
+  justify-content: center;
+  align-items: center;
+}
