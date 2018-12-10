@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RelevantPanel /> renders 1`] = `
+<div
+  className="relavent-item"
+  key="COM"
+>
+  <div
+    className="relavent-item-row relavent-item-title"
+  >
+    <h6
+      title={null}
+    >
+      Company
+    </h6>
+    <span>
+      COM
+    </span>
+  </div>
+  <div
+    className="relavent-item-row relavent-item-info"
+  >
+    <span>
+      4
+    </span>
+    <span
+      style={
+        Object {
+          "color": "green",
+        }
+      }
+    >
+      +4.00%
+    </span>
+    <Link
+      onClick={[Function]}
+      onDragStart={[Function]}
+      replace={false}
+      to="/stock?cmp=COM"
+    >
+      More...
+    </Link>
+  </div>
+</div>
+`;
