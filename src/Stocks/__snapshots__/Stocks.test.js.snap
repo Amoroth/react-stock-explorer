@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Stocks /> renders 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="markets-container"
+  >
+    <circularButton
+      func={[Function]}
+      key="infocus"
+    >
+      In Focus
+    </circularButton>
+    <circularButton
+      func={[Function]}
+      key="favorites"
+    >
+      Favorites
+    </circularButton>
+    <circularButton
+      func={[Function]}
+      key="gainers"
+    >
+      Gainers
+    </circularButton>
+    <circularButton
+      func={[Function]}
+      key="losers"
+    >
+      Losers
+    </circularButton>
+  </div>
+  <div
+    className="stocks-container"
+  >
+    <withRouter(panel)
+      change={0.01}
+      currency="USD"
+      favorite={false}
+      key="COM"
+      onFav={[MockFunction]}
+      short="COM"
+      title="Company"
+    />
+    <withRouter(panel)
+      change={0.02}
+      currency="USD"
+      favorite={true}
+      key="OTH"
+      onFav={[MockFunction]}
+      short="OTH"
+      title="Other"
+    />
+    <withRouter(panel)
+      change={0.03}
+      currency="USD"
+      favorite={false}
+      key="OTH 3"
+      onFav={[MockFunction]}
+      short="OTH 3"
+      title="Other 3"
+    />
+    <withRouter(panel)
+      change={0.04}
+      currency="USD"
+      favorite={false}
+      key="OTH 4"
+      onFav={[MockFunction]}
+      short="OTH 4"
+      title="Other 4"
+    />
+  </div>
+</div>
+`;
