@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/react-stock-explorer/static/css/1.b04499cf.chunk.css"
   },
   {
-    "revision": "150834bcdeda8b68b513b6a054b31fec",
+    "revision": "71d2e338405c730b9992630517bf249e",
     "url": "/react-stock-explorer/index.html"
   }
 ];
