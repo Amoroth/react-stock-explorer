@@ -38,6 +38,17 @@ describe('<StockPage />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('updates book and chart on mount', () => {
+    const bookFn = jest.fn()
+    const chartFn = jest.fn()
+    wrapper.instance().updateBook = bookFn
+    wrapper.instance().updateChart = chartFn
+    wrapper.instance().componentDidMount()
+
+    expect(bookFn).toBeCalled()
+    expect(chartFn).toBeCalled()
+  })
+
   it('shows spinner if no chart data', () => {
     wrapper.setState({ chart: [] })
     expect(wrapper.find('.spinner-container').exists()).toBe(true)
