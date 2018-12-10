@@ -2,10 +2,12 @@
   "name": "stock-explorer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://amoroth.github.io/react-stock-explorer",
   "dependencies": {
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "enzyme-to-json": "^3.3.5",
+    "gh-pages": "^2.0.1",
     "i": "^0.3.6",
     "jest-fetch-mock": "^2.0.1",
     "npm": "^6.4.1",
@@ -23,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,6 +45,8 @@
     "eslint-plugin-react": "^7.11.1"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
